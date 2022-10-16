@@ -153,7 +153,7 @@ function logoutUser() {
 // add eventlisteners (alleen als je op de register.html bevindt)
 
 
-inlog_button.addEventListener("click", (e) => {
-    e.preventDefault;
-    loginUser();
-})
+// inlog_button.addEventListener("click", (e) => {
+//     e.preventDefault;
+//     loginUser();
+// })

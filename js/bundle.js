@@ -1,6 +1,9 @@
 'use strict';
 
 const sitetitle = "Wizardkind";
+const version = "0.2"; 
+const page = window.location.pathname;
+const d$1 = new Date();
 
 /*
 Hier staat alle informatie opgeslaan van de gebruiker
@@ -9,7 +12,7 @@ versie 1.0
 */
 
 // informatie over de gebruiker
-({
+let user = {
     // algemene informatie
     "id": localStorage.getItem("id"), // id van het paspoort 
     "voornaam": localStorage.getItem("voornaam"), // de voornaam
@@ -33,7 +36,7 @@ versie 1.0
     "versie": localStorage.getItem("versie"), // de versie waarin de gebruiker speelt
     "logincount": localStorage.getItem("logincount"), // aantal logins
     "speeltijd": localStorage.getItem("speeltijd") // de speeltijd
-});
+};
 // uilen
 ({
     "uilen": localStorage.getItem("uilen") // de array met brieven
@@ -244,4 +247,185 @@ document.addEventListener('alpine:init', () => {
     });
 
 
+});
+
+// HTML ELEMENTS
+const input = document.querySelectorAll("input"); // selecteren van alle input elementen
+
+// SIGNUP
+const register = document.querySelector(".register"); // Class selectern van "register"
+let bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
+
+
+// Uilen
+document.querySelector("#uilvakin");
+
+document.querySelector("#uilen_onderwerp");
+document.querySelector("#uilen_verzender");
+document.querySelector("#uilen_inhoud");
+
+// Shops
+document.querySelector("#shops");
+
+const buttons = document.querySelectorAll("button");
+const sections = document.querySelectorAll(".pagina");
+
+
+buttons.forEach((btn)=>{
+  btn.addEventListener("click", ()=>{
+    buttons.forEach((btn)=>{
+      btn.classList.remove("active");
+    });
+    btn.classList.add("active");
+    const id = btn.id;
+    sections.forEach((section)=>{
+      section.classList.remove("active");
+    });
+    const req = document.getElementsByClassName(`pagina${id}`);
+    req[0].classList.add("active");
+  });
+});
+
+// data halen uit de json database
+
+// opslaan van de gebruiker
+function setSave(id,value){
+    localStorage.setItem(id, value);
+}
+
+/*   == SIGNUP.JS  ==   */
+
+// AANMAKEN VAN DE USER
+function createUser() {
+    let voornaam = register.querySelector("#voornaam"); // ID selecteren van de voornaam
+    let achternaam = register.querySelector("#achternaam"); // ID selecteren van de achternaam
+    let geboortedatum = register.querySelector("#geboortedatum"); // ID selecteren van de geboortedatum
+    let geslacht = register.querySelector("#geslacht"); // ID selecteren van het geslacht
+    let bloed = register.querySelector("#bloed"); // ID selecteren van de bloedzuiverheid
+    let school = register.querySelector("#school"); // ID selecteren van de school (voorlopig zweinstein)
+
+    register.querySelector("#haarstijl"); // ID selecteren van het type haar
+    register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
+    register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
+
+    let inputBL, dateCheck;
+
+    input.forEach(i => {
+        (i.value == "") ? inputBL = false : inputBL = true;
+    });
+    console.log(geboortedatum);
+
+    // checken of de user.status al is ingevuld
+    // zo niet kan de gebruiker niet registreren
+    if (user.status !== null && page == "./register.html") {
+        console.log("je kan niet registreren"); // dit wordt een alert
+    }
+    else if ( inputBL === false ) {
+        // Als er nog lege velden zijn
+        console.log("Er zijn nog lege velden!"); // dit wordt een alert
+    }
+    else if (inputBL === true && dateCheck === true) {
+        //invoegen van de values.
+        // algemene informatie
+        setSave("id", 0);
+        setSave("voornaam", voornaam.value);
+        setSave("achternaam", achternaam.value);
+        setSave("geboortedatum", geboortedatum.value);
+        setSave("geslacht", geslacht.value);
+        setSave("bloedzuiverheid", bloed.value);
+
+        // school informatie
+        setSave("school", school.value);
+        setSave("afdeling", "geen");
+        setSave("jaar", 0);
+        setSave("punten", 0);
+
+        // locatie informatie
+        setSave("locatie", "geen");
+        setSave("plaats", "geen");
+
+        // meta informatie
+        setSave("status", "offline");
+        setSave("lastlogin", "niet ingelogd");
+        setSave("versie", version);
+        setSave("logins", 0);
+        setSave("speeltijd", 0);
+
+        //uilen
+        setSave("uilen", JSON.stringify(["0","1"]));
+
+        //algemene statistieken (levels)
+        setSave("level", 0);
+
+
+        //algemene statistieken 
+        setSave("hp", 100);
+        setSave("maxhp", 100);
+        setSave("hygiene", 100);
+        setSave("slaap", 100);
+        setSave("sociaal", 100);
+        setSave("fun", 100);
+
+        //galjoenen, sikkels, knoeten
+        setSave("galjoenen", 500);
+        setSave("sikkels", 0);
+        setSave("knoeten", 0);
+
+        // uiterlijke kenmerken
+        setSave("haar", haarstijl.value);
+        setSave("haarkleur", haarkleur.value);
+        setSave("ogen", oogkleur.value);
+
+        // kleding voorwerpen
+        setSave("hoofd", "Niets");
+        setSave("lichaam", "Dreuzelkleren");
+        setSave("stokhand", "Niets");
+        setSave("sieraad", "Niets");
+
+        //koffer
+        setSave("items", 0);
+        setSave("maxitems", 10);
+        setSave("voorwerpen", JSON.stringify({ naam: "aap", type: "health", value: 1 }));
+
+        //tijden
+        setSave("hongertijd", d$1.setMinutes(d$1.getMinutes() + 5));
+        setSave("hygienetijd", d$1.setMinutes(d$1.getMinutes() + 15));
+        setSave("slaaptijd", d$1.setMinutes(d$1.getMinutes() + 25));
+        setSave("sociaaltijd", d$1.setMinutes(d$1.getMinutes() + 38));
+        setSave("funtijd", d$1.setMinutes(d$1.getMinutes() + 55));
+
+        cr_voornaam.value = "";
+        cr_achternaam.value = "";
+        cr_datum.value = "";
+        cr_geslacht.value = "";
+        cr_bloed.value = "";
+        cr_school.value = "";
+        cr_haar.value = "";
+        cr_haarKleur.value = "";
+        cr_ogen.value = "";
+
+
+        console.log("Tis gelukt"); // moet een alert worden en auto login
+
+
+    }
+
+}
+// add eventlisteners (alleen als je op de register.html bevindt)
+
+
+// inlog_button.addEventListener("click", (e) => {
+//     e.preventDefault;
+//     loginUser();
+// })
+
+/* Bundle voor alles wat te maken heeft met de gebruiker.
+ - signup.js
+ - uilen.js
+*/
+
+// SIGNUP -> AANMAKEN
+bttn_aanmaken.addEventListener("click", (e) => {
+    e.preventDefault;
+    createUser();
 });

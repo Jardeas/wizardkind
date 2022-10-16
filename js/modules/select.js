@@ -5,7 +5,7 @@ export const input = document.querySelectorAll("input"); // selecteren van alle 
 
 // SIGNUP
 export const register = document.querySelector(".register"); // Class selectern van "register"
-export const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
+export let bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
 
 
 // Uilen
