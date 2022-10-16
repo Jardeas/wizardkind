@@ -1,4 +1,3 @@
-
 // data halen uit de json database
 export async function getData(mf,p) {
     // mf = mapfile
