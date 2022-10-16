@@ -42,7 +42,7 @@ let user = {
     "uilen": localStorage.getItem("uilen") // de array met brieven
 });
 // opgeslagen statistieken
-({
+let userStats = {
     // algemene statistieken
     "level": localStorage.getItem("level"), // het level van het karakter
     "toverkunde": localStorage.getItem("toverkunde"), // level van het toveren
@@ -61,7 +61,7 @@ let user = {
     "sikkels": localStorage.getItem("sikkels"), // 1 sikkel -> 29 knoeten
     "knoeten": localStorage.getItem("knoeten"), // 1 knoet
 
-});
+};
 // kenmerken over het karakter
 ({
     // uiterlijke kenmerken
@@ -82,7 +82,7 @@ let user = {
     "voorwerpen": localStorage.getItem("voorwerpen"), // array van de voorwerpen die zich bevinden in de koffer
 });
 // de inventory van de gebruiker
-({
+let userTijd = {
     "lastlogin": localStorage.getItem("lastlogin"), // wanneer je laatst ingelogd
     "hongertijd": localStorage.getItem("hongertijd"), // opgeslagen tijd van de honger/hp
     "hygienetijd": localStorage.getItem("hygienetijd"), // opgeslagen tijd van de hygiene/douche
@@ -95,7 +95,7 @@ let user = {
 
     "userdag": localStorage.getItem("userdag"), // laatst opgeslagen dag
 
-});
+};
 
 let footerText, pageTitle;
 let lnav ,rnav;
@@ -160,7 +160,7 @@ rnav = `
     <img src="./assets/img/zweinstein.png" alt="">
 </div>
 
-<div class="gebruikers_info" x-data="user_info">
+<div class="gebruikers_info">
     <span>Jellus Kaasvoet</span>
 </div>
 
@@ -249,12 +249,141 @@ document.addEventListener('alpine:init', () => {
 
 });
 
+// data halen uit de json database
+
+// opslaan van de gebruiker
+function setSave(id,value){
+    localStorage.setItem(id, value);
+}
+
+//reloaden van de pagina
+function reLoad(id,value){
+    // id = "reload", "replace"
+    // value = voor bv "index.html" wordt alleen gebruikt met de replace id
+    setTimeout(function () {
+        switch (id) {
+            case "reload":
+                location.reload();
+                break;
+        
+            case "replace":
+                location.replace(`${value}.html`);
+                break;
+        }
+    }, 1500);
+
+}
+
+let thisDate = new Date();
+let hongertijd = userTijd.hongertijd;
+let hygienetijd = userTijd.hygienetijd;
+let slaaptijd = userTijd.slaaptijd;
+let sociaaltijd = userTijd.sociaaltijd;
+let funtijd = userTijd.funtijd;
+
+let hp = userStats.hp;
+let hygiene = userStats.hygiene;
+let slaap = userStats.slaap;
+let sociaal = userStats.sociaal;
+let fun = userStats.fun;
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('meters', () => {
+        return {
+            hp: `width: ${hp}%`,
+            hptext: `${hp}%`,
+            hygiene: `width: ${hygiene}%`,
+            hygienetext: `${hygiene}%`,
+            slaap: `width: ${slaap}%`,
+            slaaptext: `${slaap}%`,
+            sociaal: `width: ${sociaal}%`,
+            sociaaltext: `${sociaal}%`,
+            fun: `width: ${fun}%`,
+            funtext: `${fun}%`,
+
+            init() {
+                setInterval(() => {
+                    thisDate = new Date();
+                    // HP SWITCH
+                    switch (true) {
+                        case (hp != 0 && thisDate.getTime() > hongertijd):
+                            hp--;
+                            hongertijd = thisDate.setMinutes(thisDate.getMinutes() + 5); // na 5 min - 1hp
+                            setSave("hongertijd", hongertijd);
+                            setSave("hp", hp);
+                            // update meter en tekst
+                            this.hp = `width: ${hp}%`;
+                            this.hptext = `${hp}%`;
+                            console.log("-hp");
+                            break;
+                        case (hp <= 0):
+                            reLoad("replace", "404");
+                            // je vliegt naar de ziekenzaal + wachtijd van ...
+                            break;
+                    }                    // HYGIENE SWITCH
+                    switch (true) {
+                        case (hygiene != 0 && thisDate.getTime() > hygienetijd):
+                            hygiene--;
+                            hygienetijd = thisDate.setMinutes(thisDate.getMinutes() + 15); // na 15 min - 1 hygiene
+                            setSave("hygienetijd", hygienetijd);
+                            setSave("hygiene", hygiene);
+                            // update meter en tekst
+                            this.hygiene = `width: ${hygiene}%`;
+                            this.hygienetext = `${hygiene}%`;
+                            console.log("-hygiene");
+                            break;
+                    }                    // SLAAP SWITCH
+                    switch (true) {
+                        case (slaap != 0 && thisDate.getTime() > slaaptijd):
+                            slaap--;
+                            slaaptijd = thisDate.setMinutes(thisDate.getMinutes() + 25); // na 25 min - 1 slaap
+                            setSave("slaaptijd", slaaptijd);
+                            setSave("slaap", slaap);
+                            // update meter en tekst
+                            this.slaap = `width: ${slaap}%`;
+                            this.slaaptext = `${slaap}%`;
+                            console.log("-slaap");
+                            break;
+                    }                    // SOCIAAL SWITCH
+                    switch (true) {
+                        case (sociaal != 0 && thisDate.getTime() > sociaaltijd):
+                            sociaal--;
+                            sociaaltijd = thisDate.setMinutes(thisDate.getMinutes() + 45); // na 45 min - 1 sociaal
+                            setSave("sociaaltijd", sociaaltijd);
+                            setSave("sociaal", sociaal);
+                            // update meter en tekst
+                            this.sociaal = `width: ${sociaal}%`;
+                            this.sociaaltext = `${sociaal}%`;
+                            console.log("-sociaal");
+                            break;
+                    }                    // FUN SWITCH
+                    switch (true) {
+                        case (fun != 0 && thisDate.getTime() > funtijd):
+                            fun--;
+                            funtijd = thisDate.setMinutes(thisDate.getMinutes() + 35); // na 35 min - 1 fun
+                            setSave("funtijd", funtijd);
+                            setSave("fun", fun);
+                            // update meter en tekst
+                            this.fun = `width: ${fun}%`;
+                            this.funtext = `${fun}%`;
+                            console.log("-fun");
+                            break;
+                    }
+                }, 1000);
+
+            }
+        }
+
+    });
+});
+
 // HTML ELEMENTS
 const input = document.querySelectorAll("input"); // selecteren van alle input elementen
+const select = document.querySelectorAll("select"); // selecteren van alle options elementen
 
 // SIGNUP
 const register = document.querySelector(".register"); // Class selectern van "register"
-let bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
+const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
 
 
 // Uilen
@@ -286,14 +415,11 @@ buttons.forEach((btn)=>{
   });
 });
 
-// data halen uit de json database
-
-// opslaan van de gebruiker
-function setSave(id,value){
-    localStorage.setItem(id, value);
-}
-
-/*   == SIGNUP.JS  ==   */
+/*   == SIGNUP.JS  ==   
+ - aanmaken van de gebruiker - createUser() 
+ - inloggen van de gebruiker
+ - uitloggen van de gebruiker
+*/
 
 // AANMAKEN VAN DE USER
 function createUser() {
@@ -304,16 +430,44 @@ function createUser() {
     let bloed = register.querySelector("#bloed"); // ID selecteren van de bloedzuiverheid
     let school = register.querySelector("#school"); // ID selecteren van de school (voorlopig zweinstein)
 
-    register.querySelector("#haarstijl"); // ID selecteren van het type haar
-    register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
-    register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
+    let haarstijl = register.querySelector("#haarstijl"); // ID selecteren van het type haar
+    let haarkleur = register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
+    let oogkleur = register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
 
-    let inputBL, dateCheck;
-
+    let inputBL, inputcheck, dateCheck,geboortejaar,ditJaar, leeftijd;
+    
+    inputcheck = 0;
     input.forEach(i => {
-        (i.value == "") ? inputBL = false : inputBL = true;
+        if(i.value === ""){
+            console.log(i.value);
+            inputcheck++;
+        }
     });
-    console.log(geboortedatum);
+    select.forEach(o => {
+        if(o.value === ""){
+            console.log(o.value);
+            inputcheck++;
+        }
+    });
+    if(inputcheck == 0){
+        inputBL = true;
+        geboortejaar = parseInt(geboortedatum.value.substring(0,4));
+        ditJaar = parseInt(d$1.getFullYear());
+        leeftijd = ditJaar - geboortejaar;
+        switch (true) {
+            case (leeftijd < 13):
+                console.log("je bent te jong");
+                break;
+        
+            default:   
+            dateCheck = true;
+                console.log("oke");
+                
+                break;
+        }
+    }else {
+        inputBL = false;
+    }
 
     // checken of de user.status al is ingevuld
     // zo niet kan de gebruiker niet registreren
@@ -394,21 +548,22 @@ function createUser() {
         setSave("sociaaltijd", d$1.setMinutes(d$1.getMinutes() + 38));
         setSave("funtijd", d$1.setMinutes(d$1.getMinutes() + 55));
 
-        cr_voornaam.value = "";
-        cr_achternaam.value = "";
-        cr_datum.value = "";
-        cr_geslacht.value = "";
-        cr_bloed.value = "";
-        cr_school.value = "";
-        cr_haar.value = "";
-        cr_haarKleur.value = "";
-        cr_ogen.value = "";
+        voornaam.value = "";
+        achternaam.value = "";
+        geboortedatum.value = "";
+        geslacht.value = "";
+        bloed.value = "";
+        school.value = "";
+        haarstijl.value = "";
+        haarkleur.value = "";
+        oogkleur.value = "";
 
 
         console.log("Tis gelukt"); // moet een alert worden en auto login
-
-
+       
+        
     }
+
 
 }
 // add eventlisteners (alleen als je op de register.html bevindt)
@@ -425,7 +580,11 @@ function createUser() {
 */
 
 // SIGNUP -> AANMAKEN
-bttn_aanmaken.addEventListener("click", (e) => {
-    e.preventDefault;
-    createUser();
-});
+switch (page) {
+    case "./register.html":
+        bttn_aanmaken.addEventListener("click", (e) => {
+            e.preventDefault;
+            createUser();
+        });
+        break;
+}

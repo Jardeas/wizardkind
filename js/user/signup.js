@@ -1,14 +1,15 @@
-/*   == SIGNUP.JS  ==   */
-// - aanmaken van de gebruiker - createUser() 
-// - inloggen van de gebruiker
-// - uitloggen van de gebruiker
+/*   == SIGNUP.JS  ==   
+ - aanmaken van de gebruiker - createUser() 
+ - inloggen van de gebruiker
+ - uitloggen van de gebruiker
+*/
 
 // IMPORTEREN VAN EXTERNE MODULES
 import "../modules/tabs"; // -> om de tabs van register te laten werken (moet nog veranderd worden)
 import { user } from "../config/save"; // -> data ophalen van de user save
 import { setSave } from "../modules/funct"; // de setSave() opvragen
 import { d, page, version } from "../config/meta"; // info opvragen uit meta
-import { input, register } from "../modules/select"; // register div importeren
+import { input, register, select } from "../modules/select"; // register div importeren
 
 // AANMAKEN VAN DE USER
 export function createUser() {
@@ -19,16 +20,44 @@ export function createUser() {
     let bloed = register.querySelector("#bloed"); // ID selecteren van de bloedzuiverheid
     let school = register.querySelector("#school"); // ID selecteren van de school (voorlopig zweinstein)
 
-    let haar = register.querySelector("#haarstijl"); // ID selecteren van het type haar
-    let haarKleur = register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
-    let ogen = register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
+    let haarstijl = register.querySelector("#haarstijl"); // ID selecteren van het type haar
+    let haarkleur = register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
+    let oogkleur = register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
 
-    let inputBL, dateCheck;
-
+    let inputBL, inputcheck, dateCheck,geboortejaar,ditJaar, leeftijd;
+    
+    inputcheck = 0;
     input.forEach(i => {
-        (i.value == "") ? inputBL = false : inputBL = true;
+        if(i.value === ""){
+            console.log(i.value);
+            inputcheck++;
+        }
     });
-    console.log(geboortedatum);
+    select.forEach(o => {
+        if(o.value === ""){
+            console.log(o.value);
+            inputcheck++
+        }
+    });
+    if(inputcheck == 0){
+        inputBL = true;
+        geboortejaar = parseInt(geboortedatum.value.substring(0,4));
+        ditJaar = parseInt(d.getFullYear());
+        leeftijd = ditJaar - geboortejaar;
+        switch (true) {
+            case (leeftijd < 13):
+                console.log("je bent te jong");
+                break;
+        
+            default:   
+            dateCheck = true;
+                console.log("oke");
+                
+                break;
+        }
+    }else{
+        inputBL = false;
+    }
 
     // checken of de user.status al is ingevuld
     // zo niet kan de gebruiker niet registreren
@@ -109,21 +138,22 @@ export function createUser() {
         setSave("sociaaltijd", d.setMinutes(d.getMinutes() + 38));
         setSave("funtijd", d.setMinutes(d.getMinutes() + 55));
 
-        cr_voornaam.value = "";
-        cr_achternaam.value = "";
-        cr_datum.value = "";
-        cr_geslacht.value = "";
-        cr_bloed.value = "";
-        cr_school.value = "";
-        cr_haar.value = "";
-        cr_haarKleur.value = "";
-        cr_ogen.value = "";
+        voornaam.value = "";
+        achternaam.value = "";
+        geboortedatum.value = "";
+        geslacht.value = "";
+        bloed.value = "";
+        school.value = "";
+        haarstijl.value = "";
+        haarkleur.value = "";
+        oogkleur.value = "";
 
 
         console.log("Tis gelukt"); // moet een alert worden en auto login
-
-
+       
+        
     }
+
 
 }
 // INLOGGEN VAN DE GEBRUIKER

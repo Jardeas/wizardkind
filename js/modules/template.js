@@ -64,7 +64,7 @@ rnav = `
     <img src="./assets/img/zweinstein.png" alt="">
 </div>
 
-<div class="gebruikers_info" x-data="user_info">
+<div class="gebruikers_info">
     <span>Jellus Kaasvoet</span>
 </div>
 

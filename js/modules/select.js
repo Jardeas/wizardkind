@@ -2,10 +2,11 @@
 
 // HTML ELEMENTS
 export const input = document.querySelectorAll("input"); // selecteren van alle input elementen
+export const select = document.querySelectorAll("select"); // selecteren van alle options elementen
 
 // SIGNUP
 export const register = document.querySelector(".register"); // Class selectern van "register"
-export let bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
+export const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
 
 
 // Uilen
