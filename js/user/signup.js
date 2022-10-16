@@ -13,16 +13,16 @@ import { input, register, select } from "../modules/select"; // register div imp
 
 // AANMAKEN VAN DE USER
 export function createUser() {
-    let voornaam = register.querySelector("#voornaam"); // ID selecteren van de voornaam
-    let achternaam = register.querySelector("#achternaam"); // ID selecteren van de achternaam
-    let geboortedatum = register.querySelector("#geboortedatum"); // ID selecteren van de geboortedatum
-    let geslacht = register.querySelector("#geslacht"); // ID selecteren van het geslacht
-    let bloed = register.querySelector("#bloed"); // ID selecteren van de bloedzuiverheid
-    let school = register.querySelector("#school"); // ID selecteren van de school (voorlopig zweinstein)
+    let voornaam = register.querySelector("#js_voornaam"); // ID selecteren van de voornaam
+    let achternaam = register.querySelector("#js_achternaam"); // ID selecteren van de achternaam
+    let geboortedatum = register.querySelector("#js_geboortedatum"); // ID selecteren van de geboortedatum
+    let geslacht = register.querySelector("js_#geslacht"); // ID selecteren van het geslacht
+    let bloed = register.querySelector("#js_bloed"); // ID selecteren van de bloedzuiverheid
+    let school = register.querySelector("#js_school"); // ID selecteren van de school (voorlopig zweinstein)
 
-    let haarstijl = register.querySelector("#haarstijl"); // ID selecteren van het type haar
-    let haarkleur = register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
-    let oogkleur = register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
+    let haarstijl = register.querySelector("#js_haarstijl"); // ID selecteren van het type haar
+    let haarkleur = register.querySelector("#js_haarkleur"); // ID selecteren van het haarkleur
+    let oogkleur = register.querySelector("#js_oogkleur"); // ID selecteren van het oogkleur
 
     let inputBL, inputcheck, dateCheck, geboortejaar, ditJaar, leeftijd;
 
