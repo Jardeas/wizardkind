@@ -1,12 +1,11 @@
 import { user } from "../config/save";
 import { reLoad, setSave } from "../modules/funct";
-import { page, version } from "../config/meta";
-
+import { page, version, d } from "../config/meta";
+import "../modules/tabs";
 
 
 // AANMAKEN VAN DE USER
 function createUser() {
-    let d = new Date();
     let cr_voornaam = document.querySelector("#cr-voornaam"); // ID selecteren van cr-voornaam
     let cr_achternaam = document.querySelector("#cr-achternaam"); // ID selecteren van cr-achternaam
     let cr_datum = document.querySelector("#cr-datum"); // ID selecteren van cr-verjaardag
