@@ -24,38 +24,39 @@ export function createUser() {
     let haarkleur = register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
     let oogkleur = register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
 
-    let inputBL, inputcheck, dateCheck,geboortejaar,ditJaar, leeftijd;
-    
+    let inputBL, inputcheck, dateCheck, geboortejaar, ditJaar, leeftijd;
+
     inputcheck = 0;
     input.forEach(i => {
-        if(i.value === ""){
+        if (i.value === "") {
             console.log(i.value);
             inputcheck++;
         }
     });
     select.forEach(o => {
-        if(o.value === ""){
+        if (o.value === "") {
             console.log(o.value);
             inputcheck++
         }
     });
-    if(inputcheck == 0){
+    if (inputcheck == 0) {
         inputBL = true;
-        geboortejaar = parseInt(geboortedatum.value.substring(0,4));
+        geboortejaar = parseInt(geboortedatum.value.substring(0, 4));
         ditJaar = parseInt(d.getFullYear());
         leeftijd = ditJaar - geboortejaar;
         switch (true) {
             case (leeftijd < 13):
-                console.log("je bent te jong");
                 break;
-        
-            default:   
-            dateCheck = true;
+            case (leeftijd > 100):
+                break
+
+            default:
+                dateCheck = true;
                 console.log("oke");
-                
+
                 break;
         }
-    }else{
+    } else {
         inputBL = false;
     }
 
@@ -64,7 +65,7 @@ export function createUser() {
     if (user.status !== null && page == "./register.html") {
         console.log("je kan niet registreren"); // dit wordt een alert
     }
-    else if ( inputBL === false ) {
+    else if (inputBL === false) {
         // Als er nog lege velden zijn
         console.log("Er zijn nog lege velden!"); // dit wordt een alert
     }
@@ -96,7 +97,7 @@ export function createUser() {
         setSave("speeltijd", 0);
 
         //uilen
-        setSave("uilen", JSON.stringify(["0","1"]));
+        setSave("uilen", JSON.stringify(["0", "1"]));
 
         //algemene statistieken (levels)
         setSave("level", 0);
@@ -150,8 +151,8 @@ export function createUser() {
 
 
         console.log("Tis gelukt"); // moet een alert worden en auto login
-       
-        
+
+
     }
 
 
