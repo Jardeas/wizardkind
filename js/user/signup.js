@@ -1,55 +1,56 @@
-import { user } from "../config/save";
-import { reLoad, setSave } from "../modules/funct";
-import { page, version } from "../config/meta";
+/*   == SIGNUP.JS  ==   */
+// - aanmaken van de gebruiker - createUser() 
+// - inloggen van de gebruiker
+// - uitloggen van de gebruiker
 
+// IMPORTEREN VAN EXTERNE MODULES
+import "../modules/tabs"; // -> om de tabs van register te laten werken (moet nog veranderd worden)
+import { user } from "../config/save"; // -> data ophalen van de user save
+import { setSave } from "../modules/funct"; // de setSave() opvragen
+import { d, page, version } from "../config/meta"; // info opvragen uit meta
+import { input, register } from "../modules/select"; // register div importeren
 
-let aanmaak_bttn = document.querySelector('#aanmaak-bttn'); // ID selecteren van aanmaak button
-let inlog_button = document.querySelector("#inlog-bttn"); // ID selecteren van inlog button
 // AANMAKEN VAN DE USER
-function createUser() {
-    let d = new Date();
-    let cr_voornaam = document.querySelector("#cr-voornaam"); // ID selecteren van cr-voornaam
-    let cr_achternaam = document.querySelector("#cr-achternaam"); // ID selecteren van cr-achternaam
-    let cr_datum = document.querySelector("#cr-datum"); // ID selecteren van cr-verjaardag
-    let cr_geslacht = document.querySelector("#cr-geslacht"); // ID selecteren van cr-geslacht
-    let cr_bloed = document.querySelector("#cr-bloed"); // ID selecteren van cr-geslacht
-    let cr_school = document.querySelector("#cr-school"); // ID selecteren van cr-school
+export function createUser() {
+    let voornaam = register.querySelector("#voornaam"); // ID selecteren van de voornaam
+    let achternaam = register.querySelector("#achternaam"); // ID selecteren van de achternaam
+    let geboortedatum = register.querySelector("#geboortedatum"); // ID selecteren van de geboortedatum
+    let geslacht = register.querySelector("#geslacht"); // ID selecteren van het geslacht
+    let bloed = register.querySelector("#bloed"); // ID selecteren van de bloedzuiverheid
+    let school = register.querySelector("#school"); // ID selecteren van de school (voorlopig zweinstein)
 
-    let cr_haar = document.querySelector("#cr-haar"); // ID selecteren van cr-haar
-    let cr_haarKleur = document.querySelector("#cr-haarKleur"); // ID selecteren van cr-haarKleur
-    let cr_ogen = document.querySelector("#cr-ogen"); // ID selecteren van cr-haar
+    let haar = register.querySelector("#haarstijl"); // ID selecteren van het type haar
+    let haarKleur = register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
+    let ogen = register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
 
-    if (user.status !== null) {
-        // checken of de user.status al is ingevuld
-        // zo niet kan de gebruiker niet registreren
-        console.log("je kan niet registreren");
+    let inputBL, dateCheck;
+
+    input.forEach(i => {
+        (i.value == "") ? inputBL = false : inputBL = true;
+    });
+    console.log(geboortedatum);
+
+    // checken of de user.status al is ingevuld
+    // zo niet kan de gebruiker niet registreren
+    if (user.status !== null && page == "./register.html") {
+        console.log("je kan niet registreren"); // dit wordt een alert
     }
-    else if (
-        cr_voornaam.value === "" ||
-        cr_achternaam.value === "" ||
-        cr_datum.value === "" ||
-        cr_geslacht.value === "" ||
-        cr_bloed.value === "" ||
-        cr_school.value === "" ||
-        cr_haar.value === "" ||
-        cr_haarKleur.value === "" ||
-        cr_ogen.value === "") {
-
+    else if ( inputBL === false ) {
         // Als er nog lege velden zijn
-        console.log("Er zijn nog lege velden!");
+        console.log("Er zijn nog lege velden!"); // dit wordt een alert
     }
-    else {
+    else if (inputBL === true && dateCheck === true) {
         //invoegen van de values.
         // algemene informatie
         setSave("id", 0);
-        setSave("voornaam", cr_voornaam.value);
-        setSave("achternaam", cr_achternaam.value);
-        setSave("geboortedatum", cr_datum.value);
-        setSave("geslacht", cr_geslacht.value);
-        setSave("bloedzuiverheid", cr_bloed.value);
+        setSave("voornaam", voornaam.value);
+        setSave("achternaam", achternaam.value);
+        setSave("geboortedatum", geboortedatum.value);
+        setSave("geslacht", geslacht.value);
+        setSave("bloedzuiverheid", bloed.value);
 
         // school informatie
-        setSave("school", cr_school.value);
+        setSave("school", school.value);
         setSave("afdeling", "geen");
         setSave("jaar", 0);
         setSave("punten", 0);
@@ -66,12 +67,11 @@ function createUser() {
         setSave("speeltijd", 0);
 
         //uilen
-        setSave("uilen", JSON.stringify(["0"]));
+        setSave("uilen", JSON.stringify(["0","1"]));
 
         //algemene statistieken (levels)
         setSave("level", 0);
-        setSave("toverkunde", 0);
-        setSave("brouwkennis", 0);
+
 
         //algemene statistieken 
         setSave("hp", 100);
@@ -87,9 +87,9 @@ function createUser() {
         setSave("knoeten", 0);
 
         // uiterlijke kenmerken
-        setSave("haar", cr_haar.value);
-        setSave("haarkleur", cr_haarKleur.value);
-        setSave("ogen", cr_ogen.value);
+        setSave("haar", haarstijl.value);
+        setSave("haarkleur", haarkleur.value);
+        setSave("ogen", oogkleur.value);
 
         // kleding voorwerpen
         setSave("hoofd", "Niets");
@@ -106,8 +106,8 @@ function createUser() {
         setSave("hongertijd", d.setMinutes(d.getMinutes() + 5));
         setSave("hygienetijd", d.setMinutes(d.getMinutes() + 15));
         setSave("slaaptijd", d.setMinutes(d.getMinutes() + 25));
-        setSave("sociaaltijd", d.setMinutes(d.getMinutes() + 45));
-        setSave("funtijd", d.setMinutes(d.getMinutes() + 35));
+        setSave("sociaaltijd", d.setMinutes(d.getMinutes() + 38));
+        setSave("funtijd", d.setMinutes(d.getMinutes() + 55));
 
         cr_voornaam.value = "";
         cr_achternaam.value = "";
@@ -120,9 +120,9 @@ function createUser() {
         cr_ogen.value = "";
 
 
-        console.log("Tis gelukt");
-     
-        
+        console.log("Tis gelukt"); // moet een alert worden en auto login
+
+
     }
 
 }
@@ -151,13 +151,9 @@ function logoutUser() {
     reLoad("replace", "index")
 }
 // add eventlisteners (alleen als je op de register.html bevindt)
-if (page === "/register.html") {
-    aanmaak_bttn.addEventListener("click", (e) => {
-        e.preventDefault;
-        createUser()
-    })
-    inlog_button.addEventListener("click", (e) => {
-        e.preventDefault;
-        loginUser();
-    })
-}
+
+
+inlog_button.addEventListener("click", (e) => {
+    e.preventDefault;
+    loginUser();
+})

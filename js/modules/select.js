@@ -1,9 +1,11 @@
 
-export const opening = document.querySelectorAll(".opening");
 
-// Signup
+// HTML ELEMENTS
+export const input = document.querySelectorAll("input"); // selecteren van alle input elementen
 
-export const uitlog_button = document.querySelector("#uitlog-bttn"); // ID selecteren van uitlog button
+// SIGNUP
+export const register = document.querySelector(".register"); // Class selectern van "register"
+export const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
 
 
 // Uilen
