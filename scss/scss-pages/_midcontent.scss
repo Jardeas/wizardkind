@@ -1,0 +1,227 @@
+.mid_content {
+    padding: 1rem;
+
+    .main_content {
+        @include grid;
+        gap: 1rem;
+
+        .artikel {
+            text-align: center;
+            padding: 1rem;
+    
+            h3 {
+                font-size: 3rem;
+            }
+
+            h4 {
+                padding: 1rem;
+                font-size: 1.5rem;
+            }
+    
+            img {
+                height: 200px;
+                width: 200px;
+                object-fit: contain;
+                margin: 0 auto;
+            }
+    
+            p {
+                padding: 1rem;
+            }
+
+            a {
+                width: 200px;
+            }
+        }
+
+        .register {
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid $color-border;
+            @include relative;
+
+            .alert {
+                @include flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 1px solid $color-border;
+                background-color: $color-bg-2;
+                gap: 1rem;
+                @include fixed;
+                top: 4.15rem;
+                left: 220px;
+                right: 220px;
+                margin: 0 auto;
+                width: 350px;
+                padding: .5rem;
+                // box-shadow: 4px 4px 0px $color-border;
+
+                p {
+                    font-size: 1rem;
+                    font-weight: bold;
+                }
+            }
+
+            .input_groep {
+                @include grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem; 
+            }
+
+            .input_field,
+            .select_field {
+                @include flex;
+                border-bottom: 2px solid $color-border;
+                align-items: center;
+                gap: 1rem;
+                padding: .5rem 0;
+
+                i {
+                    background-color: $color-border;
+                    padding: .5rem;
+                    color: $color-font;
+                }
+
+                input[type=text] {
+                    background-color: transparent;
+                    font-weight: bold;
+                    width: 100%;
+                }
+
+                select,
+                input[type=date] {
+                    background-color: transparent;
+                    font-weight: bold;
+                    width: 100%;
+                    opacity: .5;
+                }
+            }
+        }
+
+        .uilen {
+
+            h3 {
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 1.25rem;
+                padding: .5rem 1rem;
+                border: 1px solid $color-border;
+                border-bottom: 0;
+            }
+
+            &_container {
+                max-height: 220px;
+                border: 1px solid $color-border;
+                overflow-y: auto;
+
+                .uil {
+                    @include grid;
+                    grid-template-columns: 5% 10% 1fr 10% 5%;
+                    border-bottom: 1px solid $color-border;
+                    padding: 1rem 2rem;
+                    gap: .5rem;
+                    align-items: center;
+                    transition: $transition;
+                    cursor: pointer;
+
+                    &:last-child {
+                        border: 0;
+                    }
+
+                    &:hover {
+                        background-color: $color-bg-2;
+                    }
+
+                    .naam,
+                    .datum {
+                        font-weight: bold;
+                    }
+
+                    .onderwerp {
+                        width: 90%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+
+                .uil_nieuw {
+                    background-color: $color-bg-2;
+                }
+
+            }
+
+        }
+
+        .brief {
+
+            h3 {
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 1.25rem;
+                padding: .5rem 1rem;
+                border: 1px solid $color-border;
+                border-bottom: 0;
+            }
+
+            &_container {
+                border: 1px solid $color-border;
+
+                .brief_data {
+                    @include grid;
+                    grid-template-columns: 10% 1fr;
+                    background-color: $color-bg-2;
+                    border-bottom: 1px solid $color-border;
+                    font-size: .875rem;
+
+                    ul {
+
+                        &:first-child {
+                            background-color: $color-bg;
+                            border-right: 1px solid $color-border;
+                        }
+
+                        &:last-child {
+                            font-weight: bold;
+                        }
+
+                        li {
+                            border-bottom: 1px solid $color-border;
+                            padding: .5rem 1rem;
+
+                            &:last-child  {
+                                border: 0;
+                            }
+                        }
+                    }
+                }
+
+                .brief_info {
+                    padding: 2rem;
+
+                    h4 {
+                        font-size: 1.5rem;
+                        margin-bottom: .5rem;
+                    }
+
+                    p {
+                        font-style: italic;
+                    }
+
+                    .brief_reward {
+                        background-color: $color-bg-2;
+                        border: 1px solid $color-border;
+                        padding: 1rem;
+                        @include flex;
+                        justify-content: space-between;
+                        margin-top: 2rem;
+                        
+                        h5 {
+                            font-weight: bolder;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+.tabs_container {
+    width: 100%;
+    overflow: hidden;
+    padding: 1rem;
+    margin-top: 1rem;
+
+    .tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        .btn {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            background-color: transparent;
+
+            &:hover{
+                background-color: #ddd;
+            }
+        }
+        
+        .btn.active {
+            background-color: $color-bg-2;
+        }
+    }
+    
+    .sections {
+        background-color: $color-bg-2;
+
+        .pagina.active {
+            padding: 2rem;
+            display: block;
+        }
+
+        .pagina {
+            display: none;
+
+            h2 {
+                font-weight: bold;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+            }
+            
+            p {
+                letter-spacing: 1.5px;
+                line-height: 1.5;
+                font-weight: 300;
+            }
+        }
+    } 
+}

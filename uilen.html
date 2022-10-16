@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./scss/main.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title class="page-title">Uilen</title>
+</head>
+<body x-data="temp">
+
+    <!-- HEADER -->
+    <header x-html="header" class="header"></header>
+
+    <!-- MAIN CONENT -->
+    <main class="main_container">
+
+        <!-- LINKER NAVIGATIE  -->
+        <section class='nav_left' id='left-nav' x-html="leftnav"></section>
+
+        <!-- MIDDEN CONTENT --> 
+        <section class='mid_content' id='content'>
+            <!-- HIER WORD CONTENT TUSSEN GEPLAATST-->
+            <div class="main_content" id="container" >
+
+                <!-- Uilen -->
+                <div class="uilen">
+                    <h3>Uilen</h3>
+                    <div class="uilen_container">
+                        <!-- UIL -->
+                        <div class="uil uil_nieuw">
+                            <i class='bx bxs-envelope' ></i>
+                            <span class="naam">Naam</span>
+                            <span class="onderwerp">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magnam sit voluptas esse ipsum molestias perspiciatis, necessitatibus rem, quasi excepturi quod consequuntur dolore eaque minus. Amet optio ab nesciunt provident.</span>
+                            <span class="datum">15/10/2020</span>
+                            <button type="button" class="cross"><i class='bx bx-x' ></i></button>
+                        </div>
+                        <!-- UIL -->
+                        <div class="uil">
+                            <i class='bx bx-envelope-open' ></i>
+                            <span class="naam">Naam</span>
+                            <span class="onderwerp">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magnam sit voluptas esse ipsum molestias perspiciatis, necessitatibus rem, quasi excepturi quod consequuntur dolore eaque minus. Amet optio ab nesciunt provident.</span>
+                            <span class="datum">15/10/2020</span>
+                            <button type="button" class="cross"><i class='bx bx-x' ></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brief">
+                    <h3>Brief</h3>
+                    <div class="brief_container">
+                        <div class="brief_data">
+                            <ul>
+                                <li>Brief van:</li>
+                                <li>Datum</li>
+                                <li>Onderwerp</li>
+                            </ul>
+                            <ul>
+                                <li>Jellius Boardlekker</li>
+                                <li>Zaterdag, 15/10/2022 - 15:00</li>
+                                <li>Kzou graag keer aan hagrids ze baard rieken.</li>
+                            </ul>
+                        </div>
+                        <div class="brief_info">
+                            <h4>Dit is een titel</h4>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur quaerat praesentium repellendus ipsam asperiores blanditiis corrupti, alias voluptate. Nesciunt, veritatis. Facere quo ratione placeat magnam hic quod obcaecati, reprehenderit quae?</p>
+
+                            <!-- BRIEF REWARD -->
+                            <div class="brief_reward">
+                                <h5>Proficiat! Je hebt 500 galjoenen ontvangen door het zwaare werk.</h5>
+                                <button type="button" class="cross"><i class='bx bxs-x-circle' ></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- RECHTER NAVIGATIE  -->
+        <section class='nav_right' id='right-nav' x-html="rightnav"></section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer x-html="footer" class="footer"></footer>
+    
+    
+    <!-- JS SCRIPTS -->
+    <script src="js/main.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+.main_container {
+    @include grid;
+    grid-template-areas: 
+    'navleft content navright'
+    ;
+    grid-template-columns: 220px 1fr 220px;
+    height: calc(100vh - 100px);
+    width: 100vw;
+
+    .nav_left {
+        grid-area: navleft;
+        background-color: $color-bg-2;
+        overflow-y: auto;
+        border-right: 1px solid $color-border;
+        padding-left: 1rem;
+    }
+
+    .mid_content {
+        grid-area: content;
+        overflow-y: auto;
+    }
+
+    .nav_right {
+        grid-area: navright;
+        background-color: $color-bg-2;
+        overflow-y: auto;
+        padding: 1rem;
+        border-left: 1px solid $color-border;
+    }
+    
+}

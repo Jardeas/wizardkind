@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./scss/main.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title class="page-title">Registreren</title>
+</head>
+
+<body x-data="temp">
+
+    <!-- HEADER -->
+    <header x-html="header" class="header"></header>
+
+    <!-- MAIN CONENT -->
+    <main class="main_container">
+
+        <!-- LINKER NAVIGATIE  -->
+        <!-- <section class='nav_left' id='left-nav' x-html="leftnav"></section> -->
+
+        <!-- MIDDEN CONTENT -->
+        <section class='mid_content' id='content'>
+            <!-- HIER WORD CONTENT TUSSEN GEPLAATST-->
+            <div class="main_content" id="container">
+
+                <!-- REGISTER -->
+                <div class="register">
+                    <!-- ALERT -->
+                    <div class="alert">
+                        <p>Vul alle velden in</p>
+                        <button type="button" class="cross"><i class='bx bx-x'></i></button>
+                    </div>
+
+                    <!-- ARTIKEL -->
+                    <div class="artikel">
+                        <img src="./assets/items/wands.svg" alt="">
+                        <h3>Wizardkind</h3>
+                    </div>
+
+                    <div class="tabs_container">
+                        <div class="tabs">
+                            <button class="btn btn1 active" id="1">Basis</button>
+                            <button class="btn btn2" id="2">Karakter</button>
+                            <button class="btn btn3" id="3">Andere</button>
+                        </div>
+                        <div class="sections">
+                            <!-- BASIS -->
+                            <div class="pagina pagina1 active">
+                                <h2>Basis Informatie</h2>
+                                <!-- INPUT GROEP -->
+                                <div class="input_groep">
+                                    <!-- INPUT -->
+                                    <div class="input_field">
+                                        <i class='bx bxs-chevrons-right'></i>
+                                        <input type="text" name="" id="" placeholder="Voornaam">
+                                    </div>
+                                    <!-- INPUT -->
+                                    <div class="input_field">
+                                        <i class='bx bxs-chevrons-right'></i>
+                                        <input type="text" name="" id="" placeholder="Achternaam">
+                                    </div>
+                                </div>
+                                <!-- INPUT -->
+                                <div class="input_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <input type="date" name="" id="" placeholder="Achternaam">
+                                </div>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="" selected>Kies je geslacht</option>
+                                        <option value="tovenaar">Tovenaar</option>
+                                        <option value="heks">Heks</option>
+                                    </select>
+                                </div>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="" selected>Kies je bloedzuiverheid</option>
+                                        <option value="volbloed">Volbloed</option>
+                                        <option value="halfbloed">Halfbloed</option>
+                                        <option value="dreuzeltelg">Dreuzeltelg</option>
+                                    </select>
+                                </div>
+                                <!-- <button type="button" class="register_btn">Volgende</button> -->
+                            </div>
+
+                            <!-- STAP 2 -->
+                            <div class="pagina pagina2">
+                                <h2>Uiterlijk</h2>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="" selected>Kies je haarstijl</option>
+                                        <option value="">Geen haren</option>
+                                        <option value="">Korte haren</option>
+                                        <option value="">Halflange haren</option>
+                                        <option value="">Lange haren</option>
+                                    </select>
+                                </div>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="" selected>Kies je haarkleur</option>
+                                        <option value="">Blond</option>
+                                        <option value="">Bruin</option>
+                                        <option value="">Zwart</option>
+                                        <option value="">Rood</option>
+                                    </select>
+                                </div>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="" selected>Kies je oogkleur</option>
+                                        <option value="">Blauw</option>
+                                        <option value="">Bruin</option>
+                                        <option value="">Grijs</option>
+                                        <option value="">Groen</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <h2>Persoonlijkheid</h2>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="">Kies een karaktereigenschap</option>
+                                        <option value="g">Lef</option>
+                                        <option value="h">Geduld</option>
+                                        <option value="r">Creatief</option>
+                                        <option value="z">Vindingrijk</option>
+                                    </select>
+                                </div>
+
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="">Kies een karaktereigenschap</option>
+                                        <option value="z">Ambitieus</option>
+                                        <option value="g">Moed</option>
+                                        <option value="r">Wijs</option>
+                                        <option value="h">Loyaal</option>
+                                    </select>
+                                </div>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="">Kies een karaktereigenschap</option>
+                                        <option value="h">Tolerant</option>
+                                        <option value="r">Verstandig</option>
+                                        <option value="g">Vastberaden</option>
+                                        <option value="z">Slim</option>
+                                    </select>
+                                </div>
+                                <!-- <button type="button" class="register_btn">Volgende</button> -->
+                            </div>
+
+                            <!-- STAP 3 -->
+                            <div class="pagina pagina3">
+                                <h2>Andere opties</h2>
+                                <!-- SELECT -->
+                                <div class="select_field">
+                                    <i class='bx bxs-chevrons-right'></i>
+                                    <select name="" id="">
+                                        <option value="" selected>Kies je school</option>
+                                        <option value="">Zweinstein</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="register_btn">Aanmaken</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- RECHTER NAVIGATIE  -->
+        <!-- <section class='nav_right' id='right-nav' x-html="rightnav"></section> -->
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer x-html="footer" class="footer"></footer>
+
+
+    <!-- JS SCRIPTS -->
+    <script src="js/main.min.js"></script>
+    <script src="js/modules/tabs.js"></script>
+</body>
+
+</html>

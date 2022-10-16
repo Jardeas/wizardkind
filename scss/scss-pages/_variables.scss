@@ -1,0 +1,23 @@
+// COLORS
+$color-bg : hsl(0, 0%, 93%);
+$color-bg-2 : hsl(0, 0%, 88%);
+$color-link : hsl(0, 0%, 30%);
+$color-border : hsl(0, 0%, 70%);
+$color-font: hsl(0, 0%, 17%);
+
+// FONTS
+$default-font: "Kelvinch", sans-serif;
+
+// TRANSITION
+$transition: all ease-in-out 200ms;
+
+
+// DISPLAY
+@mixin grid {display: grid;}
+@mixin flex {display: flex;}
+
+// POSITIONS
+@mixin absolute {position: absolute;}
+@mixin relative {position: relative;}
+@mixin sticky {position: sticky;}
+@mixin fixed {position: fixed;}
