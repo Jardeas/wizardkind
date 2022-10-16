@@ -4,15 +4,15 @@ import { getData } from "../modules/funct";
 import { page } from "../config/meta"
 
 let aantalUilen = JSON.parse(userUilen.uilen);
-let div_notificaties = document.querySelector(".notificaties")
+let div_notificaties = document.querySelector(".uilen")
 let uilen_lijst = document.querySelector('.uilen_lijst');
 let brieven, userBrief, briefID, briefVerzender, briefOnderwerp, briefInhoud;
 let li, h2;
 
-let brief_Verzender = document.querySelector("#briefVerzender");
-let brief_Datum = document.querySelector("#briefDatum");
-let brief_Onderwerp = document.querySelectorAll(".briefOnderwerp");
-let brief_Inhoud = document.querySelector("#briefInhoud");
+let brief_Verzender = document.querySelector("#js_verzender");
+let brief_Datum = document.querySelector("#js_datum");
+let brief_Onderwerp = document.querySelectorAll(".js_onderwerp");
+let brief_Inhoud = document.querySelector("#js_inhoud");
 if (user.status === "online" && page === "/uilen.html" && aantalUilen === null ||  user.status === "online" &&   page === "/uilen.html" && aantalUilen.length === 0  ) {
      // als je geen brieven hebt
     div_notificaties.innerHTML = "";
