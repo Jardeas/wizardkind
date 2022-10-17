@@ -158,7 +158,7 @@ export function createUser() {
 
 }
 // INLOGGEN VAN DE GEBRUIKER
-function loginUser() {
+export function loginUser() {
 
     let loginCount = user.logincount;
     if (user.status === "offline") {

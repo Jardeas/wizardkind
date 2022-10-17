@@ -1,5 +1,6 @@
 import { sitetitle } from "../config/meta";
 import { user, userStats } from "../config/save";
+import { acces } from "./access";
 
 let footerText, pageTitle;
 let lnav ,rnav;
@@ -11,6 +12,8 @@ pageTitle = document.querySelector(".page-title").innerHTML;
 footerText = `&copy ${sitetitle}`;
 
 document.title = sitetitle + " | " + pageTitle;
+
+acces();
 
 // HTML VOOR DE LINKSE NAVIGATIE
 lnav = `

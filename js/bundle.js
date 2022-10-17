@@ -97,6 +97,52 @@ let userTijd = {
 
 };
 
+let guest = [
+    "register",
+    "404",
+    "gasten"
+];
+let memb = [
+    "register"
+];
+let count;
+// GUEST CHECK
+async function guestCheck() {
+    // als de gebruiker offline of niet bestaand is gaat hij gestuurd worden naar pagina "gasten.html"
+    if (user.status === "offline" || user.status === null) {
+        count = 0; // zet de count op 0
+        for (let x = 0; x < guest.length; x++) {
+            if (window.location.pathname === `/${guest[x]}.html`) { // als de pagina waar de gebruiker bevrindt hetzelfde is als 1vd guest array doet hij count +1
+                count++;
+                break;
+            }
+        }
+        if (count === 0) { // als de gebruiker op een pagina bevindt waar hij niet moet zijn stuurt hij hen naar de "gasten.html"
+            location.replace("gasten.html");
+        }
+    }
+}
+
+
+async function membCheck() {
+    // als de gebruiker offline of niet bestaand is gaat hij gestuurd worden naar pagina "gasten.html"
+    if (user.status === "online") {
+        for (let x = 0; x < memb.length; x++) {
+            if (window.location.pathname === `/${memb[x]}.html`) { // als de pagina waar de gebruiker bevrindt hetzelfde is als 1vd guest array doet hij count +1
+                location.replace("./index.html");
+                break;
+
+            }
+        }
+ 
+    }
+}
+
+function acces(){
+    guestCheck();
+    membCheck();
+}
+
 let footerText, pageTitle;
 let lnav ,rnav;
 let d = new Date();
@@ -107,6 +153,8 @@ pageTitle = document.querySelector(".page-title").innerHTML;
 footerText = `&copy ${sitetitle}`;
 
 document.title = sitetitle + " | " + pageTitle;
+
+acces();
 
 // HTML VOOR DE LINKSE NAVIGATIE
 lnav = `
@@ -423,49 +471,50 @@ buttons.forEach((btn)=>{
 
 // AANMAKEN VAN DE USER
 function createUser() {
-    let voornaam = register.querySelector("#voornaam"); // ID selecteren van de voornaam
-    let achternaam = register.querySelector("#achternaam"); // ID selecteren van de achternaam
-    let geboortedatum = register.querySelector("#geboortedatum"); // ID selecteren van de geboortedatum
-    let geslacht = register.querySelector("#geslacht"); // ID selecteren van het geslacht
-    let bloed = register.querySelector("#bloed"); // ID selecteren van de bloedzuiverheid
-    let school = register.querySelector("#school"); // ID selecteren van de school (voorlopig zweinstein)
+    let voornaam = register.querySelector("#js_voornaam"); // ID selecteren van de voornaam
+    let achternaam = register.querySelector("#js_achternaam"); // ID selecteren van de achternaam
+    let geboortedatum = register.querySelector("#js_geboortedatum"); // ID selecteren van de geboortedatum
+    let geslacht = register.querySelector("js_#geslacht"); // ID selecteren van het geslacht
+    let bloed = register.querySelector("#js_bloed"); // ID selecteren van de bloedzuiverheid
+    let school = register.querySelector("#js_school"); // ID selecteren van de school (voorlopig zweinstein)
 
-    let haarstijl = register.querySelector("#haarstijl"); // ID selecteren van het type haar
-    let haarkleur = register.querySelector("#haarkleur"); // ID selecteren van het haarkleur
-    let oogkleur = register.querySelector("#oogkleur"); // ID selecteren van het oogkleur
+    let haarstijl = register.querySelector("#js_haarstijl"); // ID selecteren van het type haar
+    let haarkleur = register.querySelector("#js_haarkleur"); // ID selecteren van het haarkleur
+    let oogkleur = register.querySelector("#js_oogkleur"); // ID selecteren van het oogkleur
 
-    let inputBL, inputcheck, dateCheck,geboortejaar,ditJaar, leeftijd;
-    
+    let inputBL, inputcheck, dateCheck, geboortejaar, ditJaar, leeftijd;
+
     inputcheck = 0;
     input.forEach(i => {
-        if(i.value === ""){
+        if (i.value === "") {
             console.log(i.value);
             inputcheck++;
         }
     });
     select.forEach(o => {
-        if(o.value === ""){
+        if (o.value === "") {
             console.log(o.value);
             inputcheck++;
         }
     });
-    if(inputcheck == 0){
+    if (inputcheck == 0) {
         inputBL = true;
-        geboortejaar = parseInt(geboortedatum.value.substring(0,4));
+        geboortejaar = parseInt(geboortedatum.value.substring(0, 4));
         ditJaar = parseInt(d$1.getFullYear());
         leeftijd = ditJaar - geboortejaar;
         switch (true) {
             case (leeftijd < 13):
-                console.log("je bent te jong");
                 break;
-        
-            default:   
-            dateCheck = true;
+            case (leeftijd > 100):
+                break
+
+            default:
+                dateCheck = true;
                 console.log("oke");
-                
+
                 break;
         }
-    }else {
+    } else {
         inputBL = false;
     }
 
@@ -474,7 +523,7 @@ function createUser() {
     if (user.status !== null && page == "./register.html") {
         console.log("je kan niet registreren"); // dit wordt een alert
     }
-    else if ( inputBL === false ) {
+    else if (inputBL === false) {
         // Als er nog lege velden zijn
         console.log("Er zijn nog lege velden!"); // dit wordt een alert
     }
@@ -506,7 +555,7 @@ function createUser() {
         setSave("speeltijd", 0);
 
         //uilen
-        setSave("uilen", JSON.stringify(["0","1"]));
+        setSave("uilen", JSON.stringify(["0", "1"]));
 
         //algemene statistieken (levels)
         setSave("level", 0);
@@ -560,8 +609,8 @@ function createUser() {
 
 
         console.log("Tis gelukt"); // moet een alert worden en auto login
-       
-        
+
+
     }
 
 

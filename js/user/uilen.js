@@ -17,7 +17,7 @@ if (user.status === "online" && page === "/uilen.html" && aantalUilen === null |
      // als je geen brieven hebt
     div_notificaties.innerHTML = "";
     h2 = document.createElement("h2");
-    h2.innerHTML = "Je hebt momenteel geen brieven."
+    h2.innerHTML = "Je hebt momenteel geen brieven.";
    div_notificaties.appendChild(h2);
 
 } else if (page === "./uilen.html" && user.status === "online") {
