@@ -5,6 +5,7 @@
 import { page } from "../config/meta";
 import { bttn_aanmaken, bttn_inloggen } from "../modules/select";
 import { createUser, loginUser } from "./signup";
+import { checkUilen } from "./uilen";
 
 // SIGNUP -> AANMAKEN
 switch (page) {
@@ -15,10 +16,14 @@ switch (page) {
         })
         break;
     case "/gasten.html":
-        bttn_inloggen.addEventListener("click",(e)=>{
+        bttn_inloggen.addEventListener("click", (e) => {
             e.preventDefault();
             loginUser();
         })
+        break;
+    case "/uilen.html":
+        checkUilen();
+        break;
 
     default:
         break;

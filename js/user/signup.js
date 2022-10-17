@@ -170,7 +170,7 @@ export function loginUser() {
         setSave("logincount", loginCount)
         setTimeout(() => {
             window.location.replace("/index.html")
-        }, 2000);
+        }, 1500);
     } else if (status === null) {
         //Als je geen account hebt
         console.log("geen account");
@@ -183,6 +183,7 @@ export function loginUser() {
 }
 // UITLOGGEN VAN DE GEBRUIKER
 function logoutUser() {
-    setSave("status", "offline")
+    status = "offline";
+    setSave("status", status)
     reLoad("replace", "index")
 }
