@@ -309,7 +309,7 @@ function createUser() {
         setSave("status", "offline");
         setSave("lastlogin", "niet ingelogd");
         setSave("versie", version);
-        setSave("logins", 0);
+        setSave("logincount", 0);
         setSave("speeltijd", 0);
 
         //uilen
@@ -490,8 +490,6 @@ function setWeer() {
 // DE AUTOLOGOUT FUNCTIE
 function autoLogout(){
     let logout_time = JSON.parse(userTijd.lastlogin) + 259200000;
-    console.log(logout_time);
-
     if(d$1.getTime() >= logout_time){
         logoutUser();
     }

@@ -95,7 +95,7 @@ export function createUser() {
         setSave("status", "offline");
         setSave("lastlogin", "niet ingelogd");
         setSave("versie", version);
-        setSave("logins", 0);
+        setSave("logincount", 0);
         setSave("speeltijd", 0);
 
         //uilen
