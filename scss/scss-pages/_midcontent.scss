@@ -4,6 +4,7 @@
     .main_content {
         @include grid;
         gap: 1rem;
+        @include relative;
 
         .artikel {
             text-align: center;
@@ -34,33 +35,32 @@
             }
         }
 
+        .alert {
+            @include flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid $color-border;
+            background-color: $color-bg-2;
+            gap: 1rem;
+            @include fixed;
+            top: 55px;
+            left: 220px;
+            right: 220px;
+            margin: 0 auto;
+            width: 350px;
+            padding: .5rem;
+            // box-shadow: 4px 4px 0px $color-border;
+
+            p {
+                font-size: 1rem;
+                font-weight: bold;
+            }
+        }
+
         .register {
-            width: 600px;
+            width: 800px;
             margin: 0 auto;
             border: 1px solid $color-border;
-            @include relative;
-
-            .alert {
-                @include flex;
-                justify-content: space-between;
-                align-items: center;
-                border: 1px solid $color-border;
-                background-color: $color-bg-2;
-                gap: 1rem;
-                @include fixed;
-                top: 4.15rem;
-                left: 220px;
-                right: 220px;
-                margin: 0 auto;
-                width: 350px;
-                padding: .5rem;
-                // box-shadow: 4px 4px 0px $color-border;
-
-                p {
-                    font-size: 1rem;
-                    font-weight: bold;
-                }
-            }
 
             .input_groep {
                 @include grid;
