@@ -1,6 +1,7 @@
 import { sitetitle } from "../config/meta";
 import { user, userStats } from "../config/save";
 import { acces } from "./access";
+import { autoLogout, checkDag } from "./tijd";
 
 let footerText, pageTitle;
 let lnav ,rnav;
@@ -144,7 +145,8 @@ document.addEventListener('alpine:init', () => {
               setInterval(() => {
                 d = new Date();
                 this.tijd = `${d.toLocaleTimeString('nl-NL')}`;
-                // checkDag();
+                checkDag();
+                autoLogout();
                 // checkTijd();
               }, 1000);
               

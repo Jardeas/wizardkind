@@ -87,6 +87,7 @@ let userTijd = {
     "weer": localStorage.getItem("weer"), // opgeslagen weer van het moment
 
     "userdag": localStorage.getItem("userdag"), // laatst opgeslagen dag
+    "lastlogin": localStorage.getItem("lastlogin"), // laatst opgeslagen dag
 
 }
 

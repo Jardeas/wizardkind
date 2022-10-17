@@ -6,7 +6,7 @@
 
 // IMPORTEREN VAN EXTERNE MODULES
 import "../modules/tabs"; // -> om de tabs van register te laten werken (moet nog veranderd worden)
-import { user } from "../config/save"; // -> data ophalen van de user save
+import { user, userTijd } from "../config/save"; // -> data ophalen van de user save
 import { setSave, reLoad } from "../modules/funct"; // de setSave() opvragen
 import { d, page, version } from "../config/meta"; // info opvragen uit meta
 import { input, register, select } from "../modules/select"; // register div importeren
@@ -161,16 +161,17 @@ export function createUser() {
 }
 // INLOGGEN VAN DE GEBRUIKER
 export function loginUser() {
-
     let loginCount = user.logincount;
     if (status === "offline") {
         // Als je wilt inloggen
+        loginCount++
         status = "online";
         setSave("status", status);
-        setSave("logincount", loginCount)
+        setSave("logincount", loginCount);
+        setSave("lastlogin",d.getTime());
         setTimeout(() => {
             window.location.replace("/index.html")
-        }, 1500);
+        }, 1000);
     } else if (status === null) {
         //Als je geen account hebt
         console.log("geen account");
@@ -182,7 +183,7 @@ export function loginUser() {
 
 }
 // UITLOGGEN VAN DE GEBRUIKER
-function logoutUser() {
+export function logoutUser() {
     status = "offline";
     setSave("status", status)
     reLoad("replace", "index")

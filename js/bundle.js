@@ -3,7 +3,7 @@
 const sitetitle = "Wizardkind";
 const version = "0.2"; 
 const page = window.location.pathname;
-const d$1 = new Date();
+const d$2 = new Date();
 
 /*
 Hier staat alle informatie opgeslaan van de gebruiker
@@ -94,6 +94,7 @@ let userTijd = {
     "weer": localStorage.getItem("weer"), // opgeslagen weer van het moment
 
     "userdag": localStorage.getItem("userdag"), // laatst opgeslagen dag
+    "lastlogin": localStorage.getItem("lastlogin"), // laatst opgeslagen dag
 
 };
 
@@ -141,6 +142,369 @@ async function membCheck() {
 function acces(){
     guestCheck();
     membCheck();
+}
+
+const buttons = document.querySelectorAll("button");
+const sections = document.querySelectorAll(".pagina");
+
+
+buttons.forEach((btn)=>{
+  btn.addEventListener("click", ()=>{
+    buttons.forEach((btn)=>{
+      btn.classList.remove("active");
+    });
+    btn.classList.add("active");
+    const id = btn.id;
+    sections.forEach((section)=>{
+      section.classList.remove("active");
+    });
+    const req = document.getElementsByClassName(`pagina${id}`);
+    req[0].classList.add("active");
+  });
+});
+
+// data halen uit de json database
+async function getData(mf,p) {
+    // mf = mapfile
+    // p = pathfile
+    // data staat in de js files
+    const response = await fetch(`../js/data/${mf}/${p}.json`);
+    const data = await response.json();
+    return data
+}
+
+// opslaan van de gebruiker
+function setSave(id,value){
+    localStorage.setItem(id, value);
+}
+
+//reloaden van de pagina
+function reLoad(id,value){
+    // id = "reload", "replace"
+    // value = voor bv "index.html" wordt alleen gebruikt met de replace id
+    setTimeout(function () {
+        switch (id) {
+            case "reload":
+                location.reload();
+                break;
+        
+            case "replace":
+                location.replace(`${value}.html`);
+                break;
+        }
+    }, 1500);
+
+}
+
+// HTML ELEMENTS
+const input = document.querySelectorAll("input"); // selecteren van alle input elementen
+const select = document.querySelectorAll("select"); // selecteren van alle options elementen
+
+// GASTEN
+const bttn_inloggen = document.querySelector("#js_inloggen"); // ID selecten van de inlog button
+
+
+// SIGNUP
+const register = document.querySelector(".register"); // Class selectern van "register"
+const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
+
+
+// Uilen
+document.querySelector("#uilvakin");
+
+document.querySelector("#uilen_onderwerp");
+document.querySelector("#uilen_verzender");
+document.querySelector("#uilen_inhoud");
+
+// Shops
+document.querySelector("#shops");
+
+/*   == SIGNUP.JS  ==   
+ - aanmaken van de gebruiker - createUser() 
+ - inloggen van de gebruiker
+ - uitloggen van de gebruiker
+*/
+
+let status = user.status;
+
+// AANMAKEN VAN DE USER
+function createUser() {
+    let voornaam = register.querySelector("#js_voornaam"); // ID selecteren van de voornaam
+    let achternaam = register.querySelector("#js_achternaam"); // ID selecteren van de achternaam
+    let geboortedatum = register.querySelector("#js_geboortedatum"); // ID selecteren van de geboortedatum
+    let geslacht = register.querySelector("#js_geslacht"); // ID selecteren van het geslacht
+    let bloed = register.querySelector("#js_bloed"); // ID selecteren van de bloedzuiverheid
+    let school = register.querySelector("#js_school"); // ID selecteren van de school (voorlopig zweinstein)
+
+    let haarstijl = register.querySelector("#js_haarstijl"); // ID selecteren van het type haar
+    let haarkleur = register.querySelector("#js_haarkleur"); // ID selecteren van het haarkleur
+    let oogkleur = register.querySelector("#js_oogkleur"); // ID selecteren van het oogkleur
+
+    let inputBL, inputcheck, dateCheck, geboortejaar, ditJaar, leeftijd;
+
+    inputcheck = 0;
+    input.forEach(i => {
+        if (i.value === "") {
+            console.log(i.value);
+            inputcheck++;
+        }
+    });
+    select.forEach(o => {
+        if (o.value === "") {
+            console.log(o.value);
+            inputcheck++;
+        }
+    });
+    if (inputcheck == 0) {
+        inputBL = true;
+        geboortejaar = parseInt(geboortedatum.value.substring(0, 4));
+        ditJaar = parseInt(d$2.getFullYear());
+        leeftijd = ditJaar - geboortejaar;
+        switch (true) {
+            case (leeftijd < 13):
+                break;
+            case (leeftijd > 100):
+                break
+
+            default:
+                dateCheck = true;
+                console.log("oke");
+
+                break;
+        }
+    } else {
+        inputBL = false;
+    }
+
+    // checken of de user.status al is ingevuld
+    // zo niet kan de gebruiker niet registreren
+    if (user.status !== null && page == "./register.html") {
+        console.log("je kan niet registreren"); // dit wordt een alert
+    }
+    else if (inputBL === false) {
+        // Als er nog lege velden zijn
+        console.log("Er zijn nog lege velden!"); // dit wordt een alert
+    }
+    else if (inputBL === true && dateCheck === true) {
+        //invoegen van de values.
+        // algemene informatie
+        setSave("id", 0);
+        setSave("voornaam", voornaam.value);
+        setSave("achternaam", achternaam.value);
+        setSave("geboortedatum", geboortedatum.value);
+        setSave("geslacht", geslacht.value);
+        setSave("bloedzuiverheid", bloed.value);
+
+        // school informatie
+        setSave("school", school.value);
+        setSave("afdeling", "geen");
+        setSave("jaar", 0);
+        setSave("punten", 0);
+
+        // locatie informatie
+        setSave("locatie", "geen");
+        setSave("plaats", "geen");
+
+        // meta informatie
+        setSave("status", "offline");
+        setSave("lastlogin", "niet ingelogd");
+        setSave("versie", version);
+        setSave("logins", 0);
+        setSave("speeltijd", 0);
+
+        //uilen
+        setSave("uilen", JSON.stringify(["0", "1"]));
+
+        //algemene statistieken (levels)
+        setSave("level", 0);
+
+
+        //algemene statistieken 
+        setSave("hp", 100);
+        setSave("maxhp", 100);
+        setSave("hygiene", 100);
+        setSave("slaap", 100);
+        setSave("sociaal", 100);
+        setSave("fun", 100);
+
+        //galjoenen, sikkels, knoeten
+        setSave("galjoenen", 500);
+        setSave("sikkels", 0);
+        setSave("knoeten", 0);
+
+        // uiterlijke kenmerken
+        setSave("haar", haarstijl.value);
+        setSave("haarkleur", haarkleur.value);
+        setSave("ogen", oogkleur.value);
+
+        // kleding voorwerpen
+        setSave("hoofd", "Niets");
+        setSave("lichaam", "Dreuzelkleren");
+        setSave("stokhand", "Niets");
+        setSave("sieraad", "Niets");
+
+        //koffer
+        setSave("items", 0);
+        setSave("maxitems", 10);
+        setSave("voorwerpen", JSON.stringify({ naam: "aap", type: "health", value: 1 }));
+
+        //tijden
+        setSave("hongertijd", d$2.setMinutes(d$2.getMinutes() + 5));
+        setSave("hygienetijd", d$2.setMinutes(d$2.getMinutes() + 15));
+        setSave("slaaptijd", d$2.setMinutes(d$2.getMinutes() + 25));
+        setSave("sociaaltijd", d$2.setMinutes(d$2.getMinutes() + 38));
+        setSave("funtijd", d$2.setMinutes(d$2.getMinutes() + 55));
+
+        voornaam.value = "";
+        achternaam.value = "";
+        geboortedatum.value = "";
+        geslacht.value = "";
+        bloed.value = "";
+        school.value = "";
+        haarstijl.value = "";
+        haarkleur.value = "";
+        oogkleur.value = "";
+
+
+        console.log("Tis gelukt"); // moet een alert worden en auto login
+
+
+    }
+
+
+}
+// INLOGGEN VAN DE GEBRUIKER
+function loginUser() {
+    let loginCount = user.logincount;
+    if (status === "offline") {
+        // Als je wilt inloggen
+        loginCount++;
+        status = "online";
+        setSave("status", status);
+        setSave("logincount", loginCount);
+        setSave("lastlogin",d$2.getTime());
+        setTimeout(() => {
+            window.location.replace("/index.html");
+        }, 1000);
+    } else if (status === null) {
+        //Als je geen account hebt
+        console.log("geen account");
+    } else if(status ==="online") {
+        //Als er andere problemen voort doen stuur naar 404 pagina.
+        reLoad("replace", "index");
+    }
+
+
+}
+// UITLOGGEN VAN DE GEBRUIKER
+function logoutUser() {
+    status = "offline";
+    setSave("status", status);
+    reLoad("replace", "index");
+}
+
+// deze script bepaald de tijd van het spel, houdt ook rekening met kalender events, seizoenen, weer, dag en nacht
+// import { opening } from "./select";
+
+const d$1 = new Date();
+d$1.getFullYear();
+const maand = d$1.getMonth();
+const dag = d$1.getDay();
+d$1.getHours();
+d$1.getMinutes();
+let userdag = userTijd.userdag;
+
+// SEIZOENEN GEBASSEERD OP DE MAAND
+function setSeizoen() {
+    /* SEIZOENEN
+     winter = tussen maand 11 en 2
+     lente = tussen maand 2 en 5
+     zomer = tussen maand 5 en 8
+     herfst = tussen maand 8 en 11
+    */
+  if (maand == 11 && maand <= 2) {
+        setSave("seizoen", "winter");
+    }
+    else if (maand >= 2 && maand <= 5) {
+        setSave("seizoen", "lente");
+    }
+    else if (maand >= 5 && maand <= 8) {
+        setSave("seizoen", "zomer");
+    }
+    else if (maand >= 8 && maand <= 11) {
+        console.log("herfst");
+        setSave("seizoen", "herfst");
+    }
+}
+
+// WEEROMSTANDIGHEDEN GEBASSEERD OP DE SEIZOEN
+function setWeer() {
+    let seizoen = userTijd.seizoen;
+    let percent = Math.floor(Math.random() * 100);
+    switch (seizoen) {
+        case "winter":
+
+            if (percent >= 0 && percent <= 5) {
+                setSave("weer", "zonnig");
+                console.log("zonnig");
+            }
+            else if (percent >= 5 && percent <= 50) {
+                setSave("weer", "regen");
+                console.log("regen");
+            }
+            else if (percent >= 50 && percent <= 75) {
+                setSave("weer", "sneeuw");
+                console.log("sneeuw");
+            }
+            else if (percent >= 75 && percent <= 100) {
+                setSave("weer", "sneeuwstorm");
+                console.log("sneeuwstorm");
+            }
+            else {
+                console.log("error");
+            }
+            break;
+        case "herfst":
+            if (percent >= 0 && percent <= 15) {
+                setSave("weer", "zonnig");
+                console.log("zonnig");
+            }
+            else if (percent >= 15 && percent <= 25) {
+                setSave("weer", "wisselvallig");
+                console.log("wisselvallig");
+            }
+            else if (percent >= 25 && percent <= 65) {
+                setSave("weer", "regen");
+                console.log("regen");
+            }
+            else if (percent >= 65 && percent <= 100) {
+                setSave("weer", "storm");
+                console.log("storm");
+            }
+            else {
+                console.log("error");
+            }
+            break;
+    }
+}
+// DE AUTOLOGOUT FUNCTIE
+function autoLogout(){
+    let logout_time = JSON.parse(userTijd.lastlogin) + 259200000;
+    console.log(logout_time);
+
+    if(d$1.getTime() >= logout_time){
+        logoutUser();
+    }
+}
+
+// deze functie checkt of dat er een dag wisseling is.
+function checkDag() {
+    if (userdag != dag ) {
+        setSave("userdag", dag);
+        setSeizoen();
+        setWeer();
+        userdag = dag;
+    }
 }
 
 let footerText, pageTitle;
@@ -285,7 +649,8 @@ document.addEventListener('alpine:init', () => {
               setInterval(() => {
                 d = new Date();
                 this.tijd = `${d.toLocaleTimeString('nl-NL')}`;
-                // checkDag();
+                checkDag();
+                autoLogout();
                 // checkTijd();
               }, 1000);
               
@@ -296,39 +661,6 @@ document.addEventListener('alpine:init', () => {
 
 
 });
-
-// data halen uit de json database
-async function getData(mf,p) {
-    // mf = mapfile
-    // p = pathfile
-    // data staat in de js files
-    const response = await fetch(`../js/data/${mf}/${p}.json`);
-    const data = await response.json();
-    return data
-}
-
-// opslaan van de gebruiker
-function setSave(id,value){
-    localStorage.setItem(id, value);
-}
-
-//reloaden van de pagina
-function reLoad(id,value){
-    // id = "reload", "replace"
-    // value = voor bv "index.html" wordt alleen gebruikt met de replace id
-    setTimeout(function () {
-        switch (id) {
-            case "reload":
-                location.reload();
-                break;
-        
-            case "replace":
-                location.replace(`${value}.html`);
-                break;
-        }
-    }, 1500);
-
-}
 
 let thisDate = new Date();
 let hongertijd = userTijd.hongertijd;
@@ -432,225 +764,6 @@ document.addEventListener('alpine:init', () => {
 
     });
 });
-
-// HTML ELEMENTS
-const input = document.querySelectorAll("input"); // selecteren van alle input elementen
-const select = document.querySelectorAll("select"); // selecteren van alle options elementen
-
-// GASTEN
-const bttn_inloggen = document.querySelector("#js_inloggen"); // ID selecten van de inlog button
-
-
-// SIGNUP
-const register = document.querySelector(".register"); // Class selectern van "register"
-const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
-
-
-// Uilen
-document.querySelector("#uilvakin");
-
-document.querySelector("#uilen_onderwerp");
-document.querySelector("#uilen_verzender");
-document.querySelector("#uilen_inhoud");
-
-// Shops
-document.querySelector("#shops");
-
-const buttons = document.querySelectorAll("button");
-const sections = document.querySelectorAll(".pagina");
-
-
-buttons.forEach((btn)=>{
-  btn.addEventListener("click", ()=>{
-    buttons.forEach((btn)=>{
-      btn.classList.remove("active");
-    });
-    btn.classList.add("active");
-    const id = btn.id;
-    sections.forEach((section)=>{
-      section.classList.remove("active");
-    });
-    const req = document.getElementsByClassName(`pagina${id}`);
-    req[0].classList.add("active");
-  });
-});
-
-/*   == SIGNUP.JS  ==   
- - aanmaken van de gebruiker - createUser() 
- - inloggen van de gebruiker
- - uitloggen van de gebruiker
-*/
-
-let status = user.status;
-
-// AANMAKEN VAN DE USER
-function createUser() {
-    let voornaam = register.querySelector("#js_voornaam"); // ID selecteren van de voornaam
-    let achternaam = register.querySelector("#js_achternaam"); // ID selecteren van de achternaam
-    let geboortedatum = register.querySelector("#js_geboortedatum"); // ID selecteren van de geboortedatum
-    let geslacht = register.querySelector("#js_geslacht"); // ID selecteren van het geslacht
-    let bloed = register.querySelector("#js_bloed"); // ID selecteren van de bloedzuiverheid
-    let school = register.querySelector("#js_school"); // ID selecteren van de school (voorlopig zweinstein)
-
-    let haarstijl = register.querySelector("#js_haarstijl"); // ID selecteren van het type haar
-    let haarkleur = register.querySelector("#js_haarkleur"); // ID selecteren van het haarkleur
-    let oogkleur = register.querySelector("#js_oogkleur"); // ID selecteren van het oogkleur
-
-    let inputBL, inputcheck, dateCheck, geboortejaar, ditJaar, leeftijd;
-
-    inputcheck = 0;
-    input.forEach(i => {
-        if (i.value === "") {
-            console.log(i.value);
-            inputcheck++;
-        }
-    });
-    select.forEach(o => {
-        if (o.value === "") {
-            console.log(o.value);
-            inputcheck++;
-        }
-    });
-    if (inputcheck == 0) {
-        inputBL = true;
-        geboortejaar = parseInt(geboortedatum.value.substring(0, 4));
-        ditJaar = parseInt(d$1.getFullYear());
-        leeftijd = ditJaar - geboortejaar;
-        switch (true) {
-            case (leeftijd < 13):
-                break;
-            case (leeftijd > 100):
-                break
-
-            default:
-                dateCheck = true;
-                console.log("oke");
-
-                break;
-        }
-    } else {
-        inputBL = false;
-    }
-
-    // checken of de user.status al is ingevuld
-    // zo niet kan de gebruiker niet registreren
-    if (user.status !== null && page == "./register.html") {
-        console.log("je kan niet registreren"); // dit wordt een alert
-    }
-    else if (inputBL === false) {
-        // Als er nog lege velden zijn
-        console.log("Er zijn nog lege velden!"); // dit wordt een alert
-    }
-    else if (inputBL === true && dateCheck === true) {
-        //invoegen van de values.
-        // algemene informatie
-        setSave("id", 0);
-        setSave("voornaam", voornaam.value);
-        setSave("achternaam", achternaam.value);
-        setSave("geboortedatum", geboortedatum.value);
-        setSave("geslacht", geslacht.value);
-        setSave("bloedzuiverheid", bloed.value);
-
-        // school informatie
-        setSave("school", school.value);
-        setSave("afdeling", "geen");
-        setSave("jaar", 0);
-        setSave("punten", 0);
-
-        // locatie informatie
-        setSave("locatie", "geen");
-        setSave("plaats", "geen");
-
-        // meta informatie
-        setSave("status", "offline");
-        setSave("lastlogin", "niet ingelogd");
-        setSave("versie", version);
-        setSave("logins", 0);
-        setSave("speeltijd", 0);
-
-        //uilen
-        setSave("uilen", JSON.stringify(["0", "1"]));
-
-        //algemene statistieken (levels)
-        setSave("level", 0);
-
-
-        //algemene statistieken 
-        setSave("hp", 100);
-        setSave("maxhp", 100);
-        setSave("hygiene", 100);
-        setSave("slaap", 100);
-        setSave("sociaal", 100);
-        setSave("fun", 100);
-
-        //galjoenen, sikkels, knoeten
-        setSave("galjoenen", 500);
-        setSave("sikkels", 0);
-        setSave("knoeten", 0);
-
-        // uiterlijke kenmerken
-        setSave("haar", haarstijl.value);
-        setSave("haarkleur", haarkleur.value);
-        setSave("ogen", oogkleur.value);
-
-        // kleding voorwerpen
-        setSave("hoofd", "Niets");
-        setSave("lichaam", "Dreuzelkleren");
-        setSave("stokhand", "Niets");
-        setSave("sieraad", "Niets");
-
-        //koffer
-        setSave("items", 0);
-        setSave("maxitems", 10);
-        setSave("voorwerpen", JSON.stringify({ naam: "aap", type: "health", value: 1 }));
-
-        //tijden
-        setSave("hongertijd", d$1.setMinutes(d$1.getMinutes() + 5));
-        setSave("hygienetijd", d$1.setMinutes(d$1.getMinutes() + 15));
-        setSave("slaaptijd", d$1.setMinutes(d$1.getMinutes() + 25));
-        setSave("sociaaltijd", d$1.setMinutes(d$1.getMinutes() + 38));
-        setSave("funtijd", d$1.setMinutes(d$1.getMinutes() + 55));
-
-        voornaam.value = "";
-        achternaam.value = "";
-        geboortedatum.value = "";
-        geslacht.value = "";
-        bloed.value = "";
-        school.value = "";
-        haarstijl.value = "";
-        haarkleur.value = "";
-        oogkleur.value = "";
-
-
-        console.log("Tis gelukt"); // moet een alert worden en auto login
-
-
-    }
-
-
-}
-// INLOGGEN VAN DE GEBRUIKER
-function loginUser() {
-
-    let loginCount = user.logincount;
-    if (status === "offline") {
-        // Als je wilt inloggen
-        status = "online";
-        setSave("status", status);
-        setSave("logincount", loginCount);
-        setTimeout(() => {
-            window.location.replace("/index.html");
-        }, 1500);
-    } else if (status === null) {
-        //Als je geen account hebt
-        console.log("geen account");
-    } else if(status ==="online") {
-        //Als er andere problemen voort doen stuur naar 404 pagina.
-        reLoad("replace", "index");
-    }
-
-
-}
 
 //UILEN
 

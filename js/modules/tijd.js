@@ -1,7 +1,8 @@
 // deze script bepaald de tijd van het spel, houdt ook rekening met kalender events, seizoenen, weer, dag en nacht
 import { user, userTijd } from "../config/save";
+import { logoutUser } from "../user/signup";
 import { setSave } from "./funct";
-import { opening } from "./select";
+// import { opening } from "./select";
 
 const d = new Date();
 const jaar = d.getFullYear();
@@ -84,6 +85,13 @@ function setWeer() {
             break;
         default:
             break;
+    }
+}
+// DE AUTOLOGOUT FUNCTIE
+export function autoLogout(){
+    let logout_time = JSON.parse(userTijd.lastlogin) + 259200000;
+    if(d.getTime() >= logout_time){
+        logoutUser()
     }
 }
 
