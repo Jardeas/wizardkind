@@ -305,7 +305,7 @@ function setSave(id,value){
 }
 
 //reloaden van de pagina
-function reLoad(id,value){
+function reLoad$1(id,value){
     // id = "reload", "replace"
     // value = voor bv "index.html" wordt alleen gebruikt met de replace id
     setTimeout(function () {
@@ -365,7 +365,7 @@ document.addEventListener('alpine:init', () => {
                             console.log("-hp");
                             break;
                         case (hp <= 0):
-                            reLoad("replace", "404");
+                            reLoad$1("replace", "404");
                             // je vliegt naar de ziekenzaal + wachtijd van ...
                             break;
                     }                    // HYGIENE SWITCH
@@ -428,6 +428,10 @@ document.addEventListener('alpine:init', () => {
 // HTML ELEMENTS
 const input = document.querySelectorAll("input"); // selecteren van alle input elementen
 const select = document.querySelectorAll("select"); // selecteren van alle options elementen
+
+// GASTEN
+const bttn_inloggen = document.querySelector("#js_inloggen"); // ID selecten van de inlog button
+
 
 // SIGNUP
 const register = document.querySelector(".register"); // Class selectern van "register"
@@ -615,6 +619,25 @@ function createUser() {
 
 
 }
+// INLOGGEN VAN DE GEBRUIKER
+function loginUser() {
+
+    let loginCount = user.logincount;
+    if (user.status === "offline") {
+        // Als je wilt inloggen
+        setSave("status", "online");
+        setSave("logincount", loginCount);
+        reLoad("replace", "index");
+    } else if (user.status === null) {
+        //Als je geen account hebt
+        console.log("geen account");
+    } else {
+        //Als er andere problemen voort doen stuur naar 404 pagina.
+        reLoad("replace", "404");
+    }
+
+
+}
 // add eventlisteners (alleen als je op de register.html bevindt)
 
 
@@ -630,10 +653,15 @@ function createUser() {
 
 // SIGNUP -> AANMAKEN
 switch (page) {
-    case "./register.html":
+    case "/register.html":
         bttn_aanmaken.addEventListener("click", (e) => {
             e.preventDefault;
             createUser();
         });
         break;
+    case "/gasten.html":
+        bttn_inloggen.addEventListener("click",(e)=>{
+            e.preventDefault();
+            loginUser();
+        });
 }

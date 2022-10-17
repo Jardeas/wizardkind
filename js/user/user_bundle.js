@@ -8,15 +8,15 @@ import { createUser, loginUser } from "./signup";
 
 // SIGNUP -> AANMAKEN
 switch (page) {
-    case "./register.html":
+    case "/register.html":
         bttn_aanmaken.addEventListener("click", (e) => {
             e.preventDefault;
             createUser();
         })
         break;
-    case "./gasten.html":
+    case "/gasten.html":
         bttn_inloggen.addEventListener("click",(e)=>{
-            e.preventDefault;
+            e.preventDefault();
             loginUser();
         })
 
