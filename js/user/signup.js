@@ -7,16 +7,18 @@
 // IMPORTEREN VAN EXTERNE MODULES
 import "../modules/tabs"; // -> om de tabs van register te laten werken (moet nog veranderd worden)
 import { user } from "../config/save"; // -> data ophalen van de user save
-import { setSave } from "../modules/funct"; // de setSave() opvragen
+import { setSave, reLoad } from "../modules/funct"; // de setSave() opvragen
 import { d, page, version } from "../config/meta"; // info opvragen uit meta
 import { input, register, select } from "../modules/select"; // register div importeren
+
+let status = user.status;
 
 // AANMAKEN VAN DE USER
 export function createUser() {
     let voornaam = register.querySelector("#js_voornaam"); // ID selecteren van de voornaam
     let achternaam = register.querySelector("#js_achternaam"); // ID selecteren van de achternaam
     let geboortedatum = register.querySelector("#js_geboortedatum"); // ID selecteren van de geboortedatum
-    let geslacht = register.querySelector("js_#geslacht"); // ID selecteren van het geslacht
+    let geslacht = register.querySelector("#js_geslacht"); // ID selecteren van het geslacht
     let bloed = register.querySelector("#js_bloed"); // ID selecteren van de bloedzuiverheid
     let school = register.querySelector("#js_school"); // ID selecteren van de school (voorlopig zweinstein)
 
@@ -161,17 +163,20 @@ export function createUser() {
 export function loginUser() {
 
     let loginCount = user.logincount;
-    if (user.status === "offline") {
+    if (status === "offline") {
         // Als je wilt inloggen
-        setSave("status", "online");
+        status = "online";
+        setSave("status", status);
         setSave("logincount", loginCount)
-        reLoad("replace", "index")
-    } else if (user.status === null) {
+        setTimeout(() => {
+            window.location.replace("/index.html")
+        }, 2000);
+    } else if (status === null) {
         //Als je geen account hebt
         console.log("geen account");
-    } else {
+    } else if(status ==="online") {
         //Als er andere problemen voort doen stuur naar 404 pagina.
-        reLoad("replace", "404")
+        reLoad("replace", "index")
     }
 
 
@@ -181,10 +186,3 @@ function logoutUser() {
     setSave("status", "offline")
     reLoad("replace", "index")
 }
-// add eventlisteners (alleen als je op de register.html bevindt)
-
-
-// inlog_button.addEventListener("click", (e) => {
-//     e.preventDefault;
-//     loginUser();
-// })

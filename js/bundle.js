@@ -129,7 +129,7 @@ async function membCheck() {
     if (user.status === "online") {
         for (let x = 0; x < memb.length; x++) {
             if (window.location.pathname === `/${memb[x]}.html`) { // als de pagina waar de gebruiker bevrindt hetzelfde is als 1vd guest array doet hij count +1
-                location.replace("./index.html");
+                location.replace("./404.html");
                 break;
 
             }
@@ -305,7 +305,7 @@ function setSave(id,value){
 }
 
 //reloaden van de pagina
-function reLoad$1(id,value){
+function reLoad(id,value){
     // id = "reload", "replace"
     // value = voor bv "index.html" wordt alleen gebruikt met de replace id
     setTimeout(function () {
@@ -365,7 +365,7 @@ document.addEventListener('alpine:init', () => {
                             console.log("-hp");
                             break;
                         case (hp <= 0):
-                            reLoad$1("replace", "404");
+                            reLoad("replace", "404");
                             // je vliegt naar de ziekenzaal + wachtijd van ...
                             break;
                     }                    // HYGIENE SWITCH
@@ -473,12 +473,14 @@ buttons.forEach((btn)=>{
  - uitloggen van de gebruiker
 */
 
+let status = user.status;
+
 // AANMAKEN VAN DE USER
 function createUser() {
     let voornaam = register.querySelector("#js_voornaam"); // ID selecteren van de voornaam
     let achternaam = register.querySelector("#js_achternaam"); // ID selecteren van de achternaam
     let geboortedatum = register.querySelector("#js_geboortedatum"); // ID selecteren van de geboortedatum
-    let geslacht = register.querySelector("js_#geslacht"); // ID selecteren van het geslacht
+    let geslacht = register.querySelector("#js_geslacht"); // ID selecteren van het geslacht
     let bloed = register.querySelector("#js_bloed"); // ID selecteren van de bloedzuiverheid
     let school = register.querySelector("#js_school"); // ID selecteren van de school (voorlopig zweinstein)
 
@@ -623,28 +625,24 @@ function createUser() {
 function loginUser() {
 
     let loginCount = user.logincount;
-    if (user.status === "offline") {
+    if (status === "offline") {
         // Als je wilt inloggen
-        setSave("status", "online");
+        status = "online";
+        setSave("status", status);
         setSave("logincount", loginCount);
-        reLoad("replace", "index");
-    } else if (user.status === null) {
+        setTimeout(() => {
+            window.location.replace("/index.html");
+        }, 2000);
+    } else if (status === null) {
         //Als je geen account hebt
         console.log("geen account");
-    } else {
+    } else if(status ==="online") {
         //Als er andere problemen voort doen stuur naar 404 pagina.
-        reLoad("replace", "404");
+        reLoad("replace", "index");
     }
 
 
 }
-// add eventlisteners (alleen als je op de register.html bevindt)
-
-
-// inlog_button.addEventListener("click", (e) => {
-//     e.preventDefault;
-//     loginUser();
-// })
 
 /* Bundle voor alles wat te maken heeft met de gebruiker.
  - signup.js

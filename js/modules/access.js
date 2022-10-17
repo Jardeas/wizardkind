@@ -32,7 +32,7 @@ async function membCheck() {
     if (user.status === "online") {
         for (let x = 0; x < memb.length; x++) {
             if (window.location.pathname === `/${memb[x]}.html`) { // als de pagina waar de gebruiker bevrindt hetzelfde is als 1vd guest array doet hij count +1
-                location.replace("./index.html");
+                location.replace("./404.html");
                 break;
 
             }
