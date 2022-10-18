@@ -294,7 +294,7 @@
 }
 .mid_content .main_content .uilen_container .uil {
   display: grid;
-  grid-template-columns: 5% 10% 1fr 10% 5%;
+  grid-template-columns: 5% 15% 1fr 10% 5%;
   border-bottom: 1px solid hsl(0deg, 0%, 70%);
   padding: 1rem 2rem;
   gap: 0.5rem;

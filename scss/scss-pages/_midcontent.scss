@@ -116,7 +116,7 @@
 
                 .uil {
                     @include grid;
-                    grid-template-columns: 5% 10% 1fr 10% 5%;
+                    grid-template-columns: 5% 15% 1fr 10% 5%;
                     border-bottom: 1px solid $color-border;
                     padding: 1rem 2rem;
                     gap: .5rem;
