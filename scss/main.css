@@ -188,6 +188,36 @@
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
 }
+.nav_right .geld {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.nav_right .geld .galjoenen,
+.nav_right .geld .sikkels,
+.nav_right .geld .knoeten {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 0.7rem;
+}
+.nav_right .geld .galjoenen img,
+.nav_right .geld .sikkels img,
+.nav_right .geld .knoeten img {
+  height: 10px;
+  width: 10px;
+}
+.nav_right .geld .galjoenen {
+  background-color: hsl(43deg, 77%, 77%);
+}
+.nav_right .geld .sikkels {
+  background-color: hsl(43deg, 3%, 70%);
+}
+.nav_right .geld .knoeten {
+  background-color: hsl(35deg, 33%, 70%);
+}
 
 .mid_content {
   padding: 1rem;

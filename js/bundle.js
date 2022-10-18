@@ -621,6 +621,17 @@ rnav = `
     </div>
 </div>
 
+<div class="geld">
+    <div class="galjoenen">
+        <img src="./assets/img/galleon.svg" alt=""><span>1000</span>
+    </div>
+    <div class="sikkels">
+        <img src="./assets/img/sickle.svg" alt=""><span>1500</span>
+    </div>
+    <div class="knoeten">
+        <img src="./assets/img/knut.svg" alt=""><span>2000</span>
+    </div>
+</div>
 
 `;
 

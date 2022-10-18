@@ -148,4 +148,39 @@
             padding: .2rem .5rem;
         }
     } 
+
+    .geld {
+        @include grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        .galjoenen,
+        .sikkels,
+        .knoeten {
+            @include flex;
+            align-items: center;
+            gap: .5rem;
+            box-sizing: border-box;
+            padding: .5rem;
+            font-weight: bold;
+            font-size: .7rem;
+
+            img {
+                height: 10px;
+                width: 10px;
+            }
+        }
+
+        .galjoenen {
+            background-color: $galjoenen;
+        }
+    
+        .sikkels {
+            background-color: $sikkels;
+        }
+    
+        .knoeten {
+            background-color: $knoeten;
+        }
+    
+    }
 }
