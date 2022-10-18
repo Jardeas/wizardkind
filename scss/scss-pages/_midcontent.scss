@@ -335,5 +335,145 @@
             }
 
         }
+
+        .wegisweg {
+            
+            &_container {
+                @include grid;
+                grid-template-columns: 35% 1fr;
+                gap:1rem;
+                margin: 1rem 0;
+
+                // WINKELS lIJST
+                .winkels {
+                    
+                    .winkels_lijst {
+                        border: 1px solid $color-border;  
+                        border-top: 0;
+                        overflow-x: auto;
+                        max-height: calc(100vh - 240px);
+
+                        li {
+                            padding: 1rem;
+                            font-weight: bold;
+                            border-bottom: 1px solid $color-border;
+                            text-transform: capitalize;
+                            cursor: pointer;
+                            transition: $transition;
+
+                            &:last-child {
+                                border: 0;
+                            }
+
+                            &:hover {
+                                background-color: $color-bg-2;
+                            }
+                        }
+
+                        .winkel_active {
+                            background-color: $color-bg-2;
+                        }
+                    }
+                }
+
+                // WINKEL ZELF
+                .winkel {
+
+                    .winkel_items {
+                        border: 1px solid $color-border;  
+                        border-top: 0;
+                        overflow-x: auto;
+                        max-height: calc(100vh - 240px);
+
+                        .winkel_item {
+                            @include grid;
+                            grid-template-columns: 150px 1fr 150px;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 2rem;
+                            padding: 1rem;
+                            border-bottom: 1px solid $color-border;
+                            background-color: $color-bg-2;
+
+                            &:last-child {
+                                border: 0;
+                            }
+
+                            ul {
+                                font-size: .875rem;
+
+                                li {
+                                    margin-top: .5rem;
+
+                                    h4 {
+                                        font-style: normal;
+                                        font-size: 1.25rem;
+                                        font-weight: bold;
+                                    }
+                                    
+                                    span {
+                                        font-weight: bold;
+                                    }
+
+                                    p {
+                                        font-size: .75rem;
+                                        font-style: italic;
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                .kosten {
+                                    @include flex;
+                                    gap: .5rem;
+                                    align-items: center;
+
+                                    img {
+                                        height: 15px;
+                                        width: 15px;
+                                        border: 0;
+                                    }
+                                }
+
+
+                            } 
+
+                            .kopen {
+                                @include flex;
+                                align-items: center;
+
+                                select,
+                                button {
+                                    background-color: $color-bg;
+                                    border: 1px solid $color-border;
+                                    padding: .5rem;
+                                    cursor: pointer;
+                                }
+
+                                select {
+                                    border-right: 0;
+                                }
+
+                                button {
+
+                                    &:hover {
+                                        background-color: $color-border;
+                                    }
+                                }
+
+                            }
+
+                            p {
+                                padding: .5rem;
+                                grid-column: span 3;
+                                font-size: .75rem;
+                                font-weight: bold;
+                                font-style: italic;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }

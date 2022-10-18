@@ -455,6 +455,107 @@
   font-style: italic;
   font-size: 0.875rem;
 }
+.mid_content .main_content .wegisweg_container {
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.mid_content .main_content .wegisweg_container .winkels .winkels_lijst {
+  border: 1px solid hsl(0deg, 0%, 70%);
+  border-top: 0;
+  overflow-x: auto;
+  max-height: calc(100vh - 240px);
+}
+.mid_content .main_content .wegisweg_container .winkels .winkels_lijst li {
+  padding: 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid hsl(0deg, 0%, 70%);
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+.mid_content .main_content .wegisweg_container .winkels .winkels_lijst li:last-child {
+  border: 0;
+}
+.mid_content .main_content .wegisweg_container .winkels .winkels_lijst li:hover {
+  background-color: hsl(0deg, 0%, 88%);
+}
+.mid_content .main_content .wegisweg_container .winkels .winkels_lijst .winkel_active {
+  background-color: hsl(0deg, 0%, 88%);
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items {
+  border: 1px solid hsl(0deg, 0%, 70%);
+  border-top: 0;
+  overflow-x: auto;
+  max-height: calc(100vh - 240px);
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item {
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  border-bottom: 1px solid hsl(0deg, 0%, 70%);
+  background-color: hsl(0deg, 0%, 88%);
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item:last-child {
+  border: 0;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item ul {
+  font-size: 0.875rem;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item ul li {
+  margin-top: 0.5rem;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item ul li h4 {
+  font-style: normal;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item ul li span {
+  font-weight: bold;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item ul li p {
+  font-size: 0.75rem;
+  font-style: italic;
+  font-weight: bold;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item ul .kosten {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item ul .kosten img {
+  height: 15px;
+  width: 15px;
+  border: 0;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item .kopen {
+  display: flex;
+  align-items: center;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item .kopen select,
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item .kopen button {
+  background-color: hsl(0deg, 0%, 93%);
+  border: 1px solid hsl(0deg, 0%, 70%);
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item .kopen select {
+  border-right: 0;
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item .kopen button:hover {
+  background-color: hsl(0deg, 0%, 70%);
+}
+.mid_content .main_content .wegisweg_container .winkel .winkel_items .winkel_item p {
+  padding: 0.5rem;
+  grid-column: span 3;
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-style: italic;
+}
 
 .register_btn {
   padding: 0.5rem 1rem;
