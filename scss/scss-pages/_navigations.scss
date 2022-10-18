@@ -48,12 +48,10 @@
                 @include flex;
                 align-items: center;
                 justify-content: center;
-                height: 10px;
-                width: 10px;
-                padding: .5rem;
+                height: 20px;
+                width: 20px;
                 border-radius: .03rem;
                 background-color: $color-border;
-                font-size: .75rem;
                 font-weight: bold;
             }
         }
@@ -76,6 +74,7 @@
             width: 150px;
             border-radius: .3rem;
             margin: 0 auto;
+            padding: .5rem;
         }
     }
 
@@ -148,5 +147,5 @@
             font-size: .75rem;
             padding: .2rem .5rem;
         }
-    }
+    } 
 }

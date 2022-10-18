@@ -12,6 +12,7 @@
     
             h3 {
                 font-size: 3rem;
+                border: 0;
             }
 
             h4 {
@@ -32,6 +33,13 @@
 
             a {
                 width: 200px;
+            }
+
+            .btn_groep {
+                @include flex;
+                gap: 1rem;
+                align-items: center;
+                justify-content: center;
             }
         }
 
@@ -100,19 +108,11 @@
 
         .uilen {
 
-            h3 {
-                font-weight: bold;
-                text-transform: uppercase;
-                font-size: 1.25rem;
-                padding: .5rem 1rem;
-                border: 1px solid $color-border;
-                border-bottom: 0;
-            }
-
             &_container {
                 max-height: 220px;
                 border: 1px solid $color-border;
                 overflow-y: auto;
+                border-top: 0;
 
                 .uil {
                     @include grid;
@@ -155,17 +155,9 @@
 
         .brief {
 
-            h3 {
-                font-weight: bold;
-                text-transform: uppercase;
-                font-size: 1.25rem;
-                padding: .5rem 1rem;
-                border: 1px solid $color-border;
-                border-bottom: 0;
-            }
-
             &_container {
                 border: 1px solid $color-border;
+                border-top: 0;
 
                 .brief_data {
                     @include grid;
@@ -222,6 +214,126 @@
                     }
                 }
             }
+        }
+
+        .koffer {
+            
+            &_btns {
+                @include flex;
+                gap: 1rem;
+                margin-top: -1rem;
+                margin-bottom: 1rem;
+                padding: 0 1rem;
+
+                button {
+                    width: 100%;
+                    font-size: 1.25rem;
+                }
+            }
+
+            &_container {
+                @include grid; 
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+
+                .koffer_info {
+                    @include grid;
+                    grid-template-columns: 30% 1fr;
+                    background-color: $color-bg-2;
+                    border-left: 1px solid $color-border;
+                    border-right: 1px solid $color-border;
+                    font-size: .875rem;
+                    
+                    ul {
+
+                        &:first-child {
+                            background-color: $color-bg;
+                            border-right: 1px solid $color-border;
+                        }
+
+                        &:last-child {
+                            font-weight: bold;
+                        }
+
+                        li {
+                            border-bottom: 1px solid $color-border;
+                            padding: .5rem 1rem;
+
+                            &:last-child  {
+                                border: 0;
+                            }
+                        }
+                    }
+                }
+
+                .items_container {
+                    border: 1px solid $color-border;
+                    @include flex;
+                    padding: 1rem;
+                    gap: 1rem;
+
+                    button {
+                        border: 1px solid $color-border;
+                        cursor: pointer;
+
+                        img {
+                            height: 50px;
+                            width: 50px;
+                        }
+                    }
+
+                }
+
+                .preview_container {
+                    border: 1px solid $color-border;
+                    @include grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    padding: 1rem;
+                    gap: 1rem;
+                    border-top: 0;
+
+                    .preview {
+                        
+                        h4 {
+                            border: 1px solid $color-border;
+                            padding: .5rem;
+                            font-weight: bold;
+                        }
+
+                        &_img{
+                            border: 1px solid $color-border;
+                            border-top: 0;
+
+                            img {
+                                height: 250px;
+                                padding: .5rem;
+                                margin: 0 auto;
+                                object-fit: contain;
+                            }
+                        }
+
+                    }
+
+                    .preview_info {
+
+                        p {
+                            font-style: italic;
+                            font-size: .875rem;
+                        }
+
+                        ul {
+                            margin: .5rem 0;
+                            list-style-type: "• ";
+                            padding-left: 1rem;
+                            font-weight: bold;
+                            font-style: italic;
+                            font-size: .875rem;
+                        }
+
+                    }
+                }
+            }
+
         }
     }
 }
