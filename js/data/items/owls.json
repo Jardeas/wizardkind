@@ -1,0 +1,35 @@
+{
+    "db": {
+        "items": [
+            {
+                "naam": "Uilenkooi",
+                "omschrijving": "Altijd handig om uw uil veilig van A tot B te brengen.",
+                "g": 40,
+                "s": 3,
+                "k": 0
+            },
+            {
+                "naam": "Oehoe",
+                "omschrijving": "Een grote uil die met zijn grote spanwijde je brieven snel levert!",
+                "g": 350,
+                "s": 6,
+                "k": 20
+            },
+            
+            {
+                "naam": "Bosuil",
+                "omschrijving": "Een uil dat leeft in het bos",
+                "g": 550,
+                "s": 7,
+                "k": 22
+            },
+            {
+                "naam": "Sneeuwuil",
+                "omschrijving": "Een witte uil!",
+                "g": 985,
+                "s": 0,
+                "k": 5
+            }
+        ]
+    }
+}

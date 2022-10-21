@@ -171,7 +171,7 @@ export function loginUser() {
         setSave("lastlogin",d.getTime());
         setTimeout(() => {
             window.location.replace("/index.html")
-        }, 1000);
+        }, 500);
     } else if (status === null) {
         //Als je geen account hebt
         console.log("geen account");

@@ -3,6 +3,7 @@
  - uilen.js
 */
 import { page } from "../config/meta";
+import { getLocatie } from "../locaties/loc";
 import { bttn_aanmaken, bttn_inloggen } from "../modules/select";
 import { createUser, loginUser } from "./signup";
 import { checkUilen } from "./uilen";
@@ -23,6 +24,9 @@ switch (page) {
         break;
     case "/uilen.html":
         checkUilen();
+        break;
+    case "/locaties.html":
+        getLocatie();
         break;
 
     default:

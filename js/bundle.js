@@ -208,6 +208,14 @@ const bttn_inloggen = document.querySelector("#js_inloggen"); // ID selecten van
 const register = document.querySelector(".register"); // Class selectern van "register"
 const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
 
+// LOCATIES
+const locnaam= document.querySelector("#js-loc-naam"); // selecteren van de ID "locnaam"
+const plnaam= document.querySelector("#js-pl-naam"); // selecteren van de ID "locnaam"
+const plLijst= document.querySelector("#js-pl-lijst"); // selecteren van de ID "locnaam"
+
+const shopnaam= document.querySelector("#js-shop-naam"); // selecteren van de ID "shppnaam"
+const winkel= document.querySelector(".winkel"); // selecteren van de ID "shppnaam"
+
 
 // Uilen
 document.querySelector("#uilvakin");
@@ -385,7 +393,7 @@ function loginUser() {
         setSave("lastlogin",d$2.getTime());
         setTimeout(() => {
             window.location.replace("/index.html");
-        }, 1000);
+        }, 500);
     } else if (status === null) {
         //Als je geen account hebt
         console.log("geen account");
@@ -508,6 +516,7 @@ function checkDag() {
 let footerText, pageTitle;
 let lnav ,rnav;
 let d = new Date();
+let uil = JSON.parse(userUilen.uilen);
 
 pageTitle = document.querySelector(".page-title").innerHTML;
 
@@ -522,12 +531,12 @@ acces();
 lnav = `
 
 <ul>
-    <li>Bartus Krenkt</li>
+    <li x-text="username">Username</li>
     <li><a href="./index.html">Voorpagina</a></li>
     <li><a href="./profiel.html">Profiel</a></li>
     <li class="link_item">
         <a href="./uilen.html">Uilen</a>
-        <span class="badge">1</span>
+        <span class="badge" x-text="uilen">1</span>
     </li>
     <li><a href="./talenten.html">Talenten</a></li>
     <li><a href="#">Instellingen</a></li>
@@ -535,13 +544,14 @@ lnav = `
 
 <ul>
     <li>Menu</li>
+    <li><a href="./locaties.html">De Wegisweg</a></li>
     <li><a href="./dagboeken.html">Dagboeken</a></li>
     <li><a href="./opdrachten.html">Opdrachten</a></li>
     <li><a href="./koffer.html">Koffer</a></li>
     <li><a href="#">Kledingskast</a></li>
     <li><a href="#">De Ochtendprofeet</a></li>
     <li><a href="./reizen.html">Reizen</a></li>
-    <li><a href="./winkels.html">Winkelstraat</a></li>
+    
 </ul>
 
 <ul>
@@ -571,13 +581,13 @@ rnav = `
 </div>
 
 <div class="gebruikers_info">
-    <span>Jellus Kaasvoet</span>
+    <span x-text="username"></span>
 </div>
 
 <div class="locatie_info">
     <div class="locatie">
         <i class='bx bx-current-location'></i>
-        <a href="./sluip.html">Wegisweg (noord)</a>
+        <a href="./sluip.html" x-text="plaats">Wegisweg (noord)</a>
     </div>
     <div class="tijd" x-data="time">
         <i class='bx bx-time-five'></i>
@@ -587,7 +597,17 @@ rnav = `
         <i class='bx bx-cloud-light-rain'></i>
     </div>
 </div>
-
+<div class="geld">
+    <div class="galjoenen">
+        <img src="./assets/img/galleon.svg" alt=""><span x-text="galjoen">1000</span>
+    </div>
+    <div class="sikkels">
+        <img src="./assets/img/sickle.svg" alt=""><span x-text="sikkel">1500</span>
+    </div>
+    <div class="knoeten">
+        <img src="./assets/img/knut.svg" alt=""><span x-text="knoet">2000</span>
+    </div>
+</div>
 <div class="progress" x-data="meters">
     <div class="progress_bg" style="width: 100%;">
         <div class="progress_bar" :style="hp">
@@ -621,17 +641,7 @@ rnav = `
     </div>
 </div>
 
-<div class="geld">
-    <div class="galjoenen">
-        <img src="./assets/img/galleon.svg" alt=""><span>1000</span>
-    </div>
-    <div class="sikkels">
-        <img src="./assets/img/sickle.svg" alt=""><span>1500</span>
-    </div>
-    <div class="knoeten">
-        <img src="./assets/img/knut.svg" alt=""><span>2000</span>
-    </div>
-</div>
+
 
 `;
 
@@ -645,7 +655,13 @@ document.addEventListener('alpine:init', () => {
             header: `<p class='site-title'>${sitetitle}</p>`,
             footer: `<p class='footer-text'>${footerText}</p>`,
             leftnav: `${lnav}`,
-            rightnav: `${rnav}`
+            rightnav: `${rnav}`,
+            username: `${user.voornaam} ${user.achternaam}` ,
+            plaats: `${user.plaats}`,
+            galjoen : `${userStats.galjoenen}`,
+            sikkel : `${userStats.sikkels}`,
+            knoet : `${userStats.knoeten}`,
+            uilen : `${uil.length}`,
         }
         
 
@@ -667,7 +683,6 @@ document.addEventListener('alpine:init', () => {
         }
 
     });
-
 
 });
 
@@ -774,6 +789,127 @@ document.addEventListener('alpine:init', () => {
     });
 });
 
+let locatie, plaats;
+
+let dbloc, dbpl, dbsub, lcNaam, plNaam, sbNaam, db, dbitems;
+
+let subli;
+
+let shop_items, shop_list, shop_item;
+
+shop_list = document.querySelector(".winkel_items");
+
+
+locatie = user.locatie;
+plaats = user.plaats;
+
+
+
+
+
+
+function getLocatie() {
+  if (user.status === "online" && page === "/locaties.html") {
+    return getData("locaties", locatie)
+      .then(data => {
+        // ophalen locatie naam
+        dbloc = data.locatie;
+        lcNaam = dbloc["lc-naam"];
+        locnaam.innerHTML = lcNaam;
+
+        for (let x = 0; x < dbloc.plaatsen.length; x++) {
+          // plaats check + ophalen van de juiste locatie
+          if (plaats == x) {
+            dbpl = dbloc.plaatsen[x];
+            plNaam = dbpl["pl-naam"];
+            plnaam.innerHTML = plNaam;
+
+            // opstellen van de subplaatsen lijst
+            for (let y = 0; y < dbpl.sub.length; y++) {
+              subli = document.createElement("li");
+              dbsub = dbpl.sub[y];
+              sbNaam = dbsub["sb-naam"];
+              subli.innerHTML = sbNaam;
+              // event listener voor het element
+              subli.addEventListener("click", (e) => {
+                let active = document.querySelector(".js_active");
+                let winkel_active = document.querySelector(".winkel_active");
+                e.target.classList.add("winkel_active");
+                // als er al een winkel actief is 
+                if(active !== null){
+                  active.innerHTML = "";
+                  shop_list.classList.remove("js_active");
+                  winkel_active.classList.remove("winkel_active");
+                }
+             
+                if (locatie == "ww" || locatie == "hogm") {
+
+
+                  // html injectie voor de shops
+                  sbNaam = dbpl.sub[y]["sb-naam"];
+                  db = dbpl.sub[y]["db"];
+                  dbitems = dbpl.sub[y]["items"];
+                  shopnaam.innerHTML = sbNaam;
+                  shop_list.classList.add("js_active");
+                  getData("items", db)
+                    .then(items => {
+                      shop_items = items.db.items;
+                      
+                      for (let i = 0; i < shop_items.length; i++) {
+                        for (let w = 0; w < dbitems.length; w++) {
+
+                          if (dbitems[w] == i) {
+                           
+                            shop_item = document.createElement("li");
+                            shop_item.classList.add("winkel_item");
+                            shop_item.innerHTML = `
+                            <img src="./assets/items/${db}/${i}.svg" alt="">
+                            <ul>
+                                <li><h4>${shop_items[i]["naam"]}</h4></li>
+                                <li class="kosten"><img src="./assets/img/galleon.svg" alt=""><span>${shop_items[i]["g"]}</span></li>
+                                <li class="kosten"><img src="./assets/img/sickle.svg" alt=""><span>${shop_items[i]["s"]}</span></li>
+                                <li class="kosten"><img src="./assets/img/knut.svg" alt=""><span>${shop_items[i]["k"]}</span></li>
+                            </ul>
+                            <div class="kopen">
+                                <select name="" id="">
+                                    <option value="1">1x</option>
+                                    <option value="10">10x</option>
+                                    <option value="20">20x</option>
+                                    <option value="30">30x</option>
+                                </select>
+                                <button class="btn">Kopen</button>
+                            </div>
+                            <p>${shop_items[i]["omschrijving"]}</p>
+                        
+                            `;
+                            shop_list.appendChild(shop_item);
+                          }
+                        }
+
+                      }
+                      winkel.appendChild(shop_list);
+                    });
+
+
+                }
+                
+
+
+              });
+              plLijst.appendChild(subli);
+            }
+
+            break;
+
+          }
+
+        }
+
+
+      })
+  }
+}
+
 //UILEN
 
 let aantalUilen = JSON.parse(userUilen.uilen);
@@ -854,5 +990,8 @@ switch (page) {
         break;
     case "/uilen.html":
         checkUilen();
+        break;
+    case "/locaties.html":
+        getLocatie();
         break;
 }

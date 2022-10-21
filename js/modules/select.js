@@ -12,6 +12,14 @@ export const bttn_inloggen = document.querySelector("#js_inloggen"); // ID selec
 export const register = document.querySelector(".register"); // Class selectern van "register"
 export const bttn_aanmaken = document.querySelector("#js_aanmaken"); // ID selecten van de aanmaak button
 
+// LOCATIES
+export const locnaam= document.querySelector("#js-loc-naam"); // selecteren van de ID "locnaam"
+export const plnaam= document.querySelector("#js-pl-naam"); // selecteren van de ID "locnaam"
+export const plLijst= document.querySelector("#js-pl-lijst"); // selecteren van de ID "locnaam"
+
+export const shopnaam= document.querySelector("#js-shop-naam"); // selecteren van de ID "shppnaam"
+export const winkel= document.querySelector(".winkel"); // selecteren van de ID "shppnaam"
+
 
 // Uilen
 export const uilvakin = document.querySelector("#uilvakin");

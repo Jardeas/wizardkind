@@ -1,11 +1,12 @@
 import { sitetitle } from "../config/meta";
-import { user, userStats } from "../config/save";
+import { user, userStats, userUilen } from "../config/save";
 import { acces } from "./access";
 import { autoLogout, checkDag } from "./tijd";
 
 let footerText, pageTitle;
 let lnav ,rnav;
 let d = new Date();
+let uil = JSON.parse(userUilen.uilen);
 
 pageTitle = document.querySelector(".page-title").innerHTML;
 
@@ -20,12 +21,12 @@ acces();
 lnav = `
 
 <ul>
-    <li>Bartus Krenkt</li>
+    <li x-text="username">Username</li>
     <li><a href="./index.html">Voorpagina</a></li>
     <li><a href="./profiel.html">Profiel</a></li>
     <li class="link_item">
         <a href="./uilen.html">Uilen</a>
-        <span class="badge">1</span>
+        <span class="badge" x-text="uilen">1</span>
     </li>
     <li><a href="./talenten.html">Talenten</a></li>
     <li><a href="#">Instellingen</a></li>
@@ -33,13 +34,14 @@ lnav = `
 
 <ul>
     <li>Menu</li>
+    <li><a href="./locaties.html">De Wegisweg</a></li>
     <li><a href="./dagboeken.html">Dagboeken</a></li>
     <li><a href="./opdrachten.html">Opdrachten</a></li>
     <li><a href="./koffer.html">Koffer</a></li>
     <li><a href="#">Kledingskast</a></li>
     <li><a href="#">De Ochtendprofeet</a></li>
     <li><a href="./reizen.html">Reizen</a></li>
-    <li><a href="./winkels.html">Winkelstraat</a></li>
+    
 </ul>
 
 <ul>
@@ -69,13 +71,13 @@ rnav = `
 </div>
 
 <div class="gebruikers_info">
-    <span>Jellus Kaasvoet</span>
+    <span x-text="username"></span>
 </div>
 
 <div class="locatie_info">
     <div class="locatie">
         <i class='bx bx-current-location'></i>
-        <a href="./sluip.html">Wegisweg (noord)</a>
+        <a href="./sluip.html" x-text="plaats">Wegisweg (noord)</a>
     </div>
     <div class="tijd" x-data="time">
         <i class='bx bx-time-five'></i>
@@ -85,7 +87,17 @@ rnav = `
         <i class='bx bx-cloud-light-rain'></i>
     </div>
 </div>
-
+<div class="geld">
+    <div class="galjoenen">
+        <img src="./assets/img/galleon.svg" alt=""><span x-text="galjoen">1000</span>
+    </div>
+    <div class="sikkels">
+        <img src="./assets/img/sickle.svg" alt=""><span x-text="sikkel">1500</span>
+    </div>
+    <div class="knoeten">
+        <img src="./assets/img/knut.svg" alt=""><span x-text="knoet">2000</span>
+    </div>
+</div>
 <div class="progress" x-data="meters">
     <div class="progress_bg" style="width: 100%;">
         <div class="progress_bar" :style="hp">
@@ -119,17 +131,7 @@ rnav = `
     </div>
 </div>
 
-<div class="geld">
-    <div class="galjoenen">
-        <img src="./assets/img/galleon.svg" alt=""><span>1000</span>
-    </div>
-    <div class="sikkels">
-        <img src="./assets/img/sickle.svg" alt=""><span>1500</span>
-    </div>
-    <div class="knoeten">
-        <img src="./assets/img/knut.svg" alt=""><span>2000</span>
-    </div>
-</div>
+
 
 `;
 
@@ -143,7 +145,13 @@ document.addEventListener('alpine:init', () => {
             header: `<p class='site-title'>${sitetitle}</p>`,
             footer: `<p class='footer-text'>${footerText}</p>`,
             leftnav: `${lnav}`,
-            rightnav: `${rnav}`
+            rightnav: `${rnav}`,
+            username: `${user.voornaam} ${user.achternaam}` ,
+            plaats: `${user.plaats}`,
+            galjoen : `${userStats.galjoenen}`,
+            sikkel : `${userStats.sikkels}`,
+            knoet : `${userStats.knoeten}`,
+            uilen : `${uil.length}`,
         }
         
 
@@ -165,6 +173,5 @@ document.addEventListener('alpine:init', () => {
         }
 
     });
-
 
 });

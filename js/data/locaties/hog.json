@@ -1,0 +1,45 @@
+{
+    "locatie": {
+        "lc-naam": "Zweinstein",
+        "plaatsen": [
+            {
+                "pl-naam": "Kerkers",
+                "sub": [
+                    {
+                        "sb-naam": "Voorraadskast"
+                    },
+                    {
+                        "sb-naam": "Lokaal: Toverdranken"
+                    },
+                    {
+                        "sb-naam": "Leerlingenkamer: Zwadderich"
+                    },
+                    {
+                        "sb-naam":  "Kantoor: Afdelingshoofd Zwadderich"
+                    }
+                ]
+            },
+            {
+                "pl-naam": "Begane Grond",
+                "sub":[
+                    {
+                        "sb-naam": "Grote Zaal"
+                    },
+                    {
+                        "sb-naam":  "Lerarenkamer"
+                    },
+                    {
+                        "sb-naam": "Lokaal: Gedaanteverwisseling"
+                       
+                    },
+                    {
+                        "sb-naam": "Aankomsthal"
+                    },
+                    {
+                        "sb-naam": "Concierge kantoor"
+                    }
+                ]
+            }
+        ]
+    }
+}

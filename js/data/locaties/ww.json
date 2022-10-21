@@ -1,0 +1,36 @@
+{
+    "locatie": {
+        "lc-naam": "De Wegisweg",
+        "plaatsen": [
+            {
+                "pl-naam": "Wegisweg (Noord)",
+                "sub": [
+                    {
+                        "sb-naam": "De Lekke Ketel",
+                        "db": "drinks",
+                        "items": [0,1]
+                    },
+                    {
+                        "sb-naam": "Apothekerij"
+                    },
+                    {
+                        "sb-naam": "Braakballen Uilenboetiek",
+                        "db": "owls",
+                        "items": [0,1,3,2]
+                    }
+                ]
+            },
+            {
+                "pl-naam": "Wegisweg (Zuid)",
+                "sub":[
+                    {
+                        "sb-naam": "De Ochtendprofeet"
+                    },
+                    {
+                        "sb-naam":  "Olivanders"
+                    }
+                ]
+            }
+        ]
+    }
+}
