@@ -94,6 +94,7 @@ export function getKoffer() {
                                 <!-- PREVIEW INFO -->
                                 <div class="preview_info">
                                     <p>${db_item.omschrijving}</p>
+                                    
                                   
                                 </div>
                                 `

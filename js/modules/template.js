@@ -1,6 +1,7 @@
 import { sitetitle } from "../config/meta";
 import { user, userStats, userUilen } from "../config/save";
 import { acces } from "./access";
+import { createAlert } from "./funct";
 import { autoLogout, checkDag, checkTijd } from "./tijd";
 
 
@@ -10,12 +11,7 @@ let lnav ,rnav;
 let d = new Date();
 let uil = JSON.parse(userUilen.uilen);
 
-
-
 pageTitle = document.querySelector(".page-title").innerHTML;
-
-
-
 footerText = `&copy ${sitetitle}`;
 
 document.title = sitetitle + " | " + pageTitle;
@@ -139,9 +135,6 @@ rnav = `
 
 
 `;
-
-
-
 
 // GENERATE BASE LAYOUT
 document.addEventListener('alpine:init', () => {
