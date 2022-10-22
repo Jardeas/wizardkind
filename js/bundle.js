@@ -421,7 +421,7 @@ const d$1 = new Date();
 d$1.getFullYear();
 const maand = d$1.getMonth();
 const dag = d$1.getDay();
-d$1.getHours();
+const uur = d$1.getHours();
 d$1.getMinutes();
 let userdag = userTijd.userdag;
 
@@ -513,6 +513,20 @@ function checkDag() {
         setSeizoen();
         setWeer();
         userdag = dag;
+    }
+}
+
+function checkTijd() {
+    let winkels = document.querySelector(".wegisweg_container");
+    // Dag en Nacht
+   
+    if (uur < 7 || uur > 19) {
+       console.log("dag");
+
+    }
+    else if(page == "/locaties.html" && uur >= 20 || uur <= 7 ){
+        setSave("sluip", "Wegisweg");
+        winkels.innerHTML = `<div class="winkels><h3 id="js-pl-naam">De winkels zijn momenteel gesloten, kom later terug!</h3></div>`;
     }
 }
 
@@ -680,7 +694,7 @@ document.addEventListener('alpine:init', () => {
                 this.tijd = `${d.toLocaleTimeString('nl-NL')}`;
                 checkDag();
                 autoLogout();
-                // checkTijd();
+                checkTijd();
               }, 1000);
               
             }

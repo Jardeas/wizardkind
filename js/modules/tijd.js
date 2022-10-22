@@ -1,4 +1,5 @@
 // deze script bepaald de tijd van het spel, houdt ook rekening met kalender events, seizoenen, weer, dag en nacht
+import { page } from "../config/meta";
 import { user, userTijd } from "../config/save";
 import { logoutUser } from "../user/signup";
 import { setSave } from "./funct";
@@ -106,12 +107,15 @@ export function checkDag() {
 }
 
 export function checkTijd() {
+    let winkels = document.querySelector(".wegisweg_container");
     // Dag en Nacht
-    if (uur <= 7 && uur >= 20) {
-        // DAG
-        opening.forEach(e => {
-            e.innerHTML = "De winkels zijn momenteel gesloten, kom morgen terug!"
-        });
-      
+   
+    if (uur < 7 || uur > 19) {
+       console.log("dag");
+
+    }
+    else if(page == "/locaties.html" && uur >= 20 || uur <= 7 ){
+        setSave("sluip", "Wegisweg")
+        winkels.innerHTML = `<div class="winkels><h3 id="js-pl-naam">De winkels zijn momenteel gesloten, kom later terug!</h3></div>`
     }
 }
