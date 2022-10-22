@@ -112,7 +112,7 @@ export function checkTijd() {
     // Dag en Nacht
   switch (true) {
     // NACHT
-    case (page == "/locaties.html" && uur >= 20 || uur <= 6 ):
+    case (page == "/locaties.html" && uur >= 23 || uur <= 6 ):
         winkels.innerHTML = "De winkels zijn gesloten kom later terug!"
         setSave("sluip", "Wegisweg");
         break;

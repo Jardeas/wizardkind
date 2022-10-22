@@ -28,8 +28,8 @@ export function getKoffertype() {
 }
 
 // deze functie moet herschreven worden.
-function getitem() {
-    let items = [];
+export function getitem() {
+    let items = JSON.parse(userKoffer.voorwerpen);
     items.push({ db: "drinks", item: 0 }, {db: "owls", item: 3});
     setSave("voorwerpen", JSON.stringify(items))
 }

@@ -1,7 +1,6 @@
 import { sitetitle } from "../config/meta";
 import { user, userStats, userUilen } from "../config/save";
 import { acces } from "./access";
-import { createAlert } from "./funct";
 import { autoLogout, checkDag, checkTijd } from "./tijd";
 
 
@@ -9,8 +8,10 @@ import { autoLogout, checkDag, checkTijd } from "./tijd";
 let footerText, pageTitle;
 let lnav ,rnav;
 let d = new Date();
-let uil = JSON.parse(userUilen.uilen);
-
+let uil =[];
+if(user.status ==="online"){
+ uil = JSON.parse(userUilen.uilen);
+}
 pageTitle = document.querySelector(".page-title").innerHTML;
 footerText = `&copy ${sitetitle}`;
 

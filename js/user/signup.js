@@ -7,11 +7,13 @@
 // IMPORTEREN VAN EXTERNE MODULES
 import "../modules/tabs"; // -> om de tabs van register te laten werken (moet nog veranderd worden)
 import { user, userTijd } from "../config/save"; // -> data ophalen van de user save
-import { setSave, reLoad } from "../modules/funct"; // de setSave() opvragen
+import { setSave, reLoad, createAlert } from "../modules/funct"; // de setSave() opvragen
 import { d, page, version } from "../config/meta"; // info opvragen uit meta
 import { input, register, select } from "../modules/select"; // register div importeren
+import { getitem } from "./koffer";
 
 let status = user.status;
+let item =  [];
 
 // AANMAKEN VAN DE USER
 export function createUser() {
@@ -65,11 +67,11 @@ export function createUser() {
     // checken of de user.status al is ingevuld
     // zo niet kan de gebruiker niet registreren
     if (user.status !== null && page == "./register.html") {
-        console.log("je kan niet registreren"); // dit wordt een alert
+        createAlert("Je kan niet registreren.")
     }
     else if (inputBL === false) {
         // Als er nog lege velden zijn
-        console.log("Er zijn nog lege velden!"); // dit wordt een alert
+        createAlert("Er zijn nog lege velden!")
     }
     else if (inputBL === true && dateCheck === true) {
         //invoegen van de values.
@@ -88,8 +90,8 @@ export function createUser() {
         setSave("punten", 0);
 
         // locatie informatie
-        setSave("locatie", "geen");
-        setSave("plaats", "geen");
+        setSave("locatie", "ww");
+        setSave("plaats", 0);
 
         // meta informatie
         setSave("status", "offline");
@@ -97,6 +99,7 @@ export function createUser() {
         setSave("versie", version);
         setSave("logincount", 0);
         setSave("speeltijd", 0);
+        setSave("sluip", "Nergens");
 
         //uilen
         setSave("uilen", JSON.stringify(["0", "1"]));
@@ -130,9 +133,8 @@ export function createUser() {
         setSave("sieraad", "Niets");
 
         //koffer
-        setSave("items", 0);
-        setSave("maxitems", 10);
-        setSave("voorwerpen", JSON.stringify({ naam: "aap", type: "health", value: 1 }));
+        setSave("ktype", 0);
+        setSave("voorwerpen",JSON.stringify(item));
 
         //tijden
         setSave("hongertijd", d.setMinutes(d.getMinutes() + 5));
@@ -151,10 +153,10 @@ export function createUser() {
         haarkleur.value = "";
         oogkleur.value = "";
 
+        getitem()
+        createAlert("Je bent succesvol geregistreerd! Even geduld...<br>Klik daarna op inloggen!")
 
-        console.log("Tis gelukt"); // moet een alert worden en auto login
-
-
+        reLoad("replace","gasten");
     }
 
 
@@ -169,17 +171,17 @@ export function loginUser() {
         setSave("status", status);
         setSave("logincount", loginCount);
         setSave("lastlogin",d.getTime());
+        createAlert("Succesvol ingelogd!")
         setTimeout(() => {
             window.location.replace("/index.html")
         }, 500);
     } else if (status === null) {
         //Als je geen account hebt
-        console.log("geen account");
+        createAlert("Je hebt geen account!")
     } else if(status ==="online") {
         //Als er andere problemen voort doen stuur naar 404 pagina.
-        reLoad("replace", "index")
+        reLoad("replace", "404")
     }
-
 
 }
 // UITLOGGEN VAN DE GEBRUIKER

@@ -146,6 +146,25 @@ function acces(){
     membCheck();
 }
 
+const buttons = document.querySelectorAll("button");
+const sections = document.querySelectorAll(".pagina");
+
+
+buttons.forEach((btn)=>{
+  btn.addEventListener("click", ()=>{
+    buttons.forEach((btn)=>{
+      btn.classList.remove("active");
+    });
+    btn.classList.add("active");
+    const id = btn.id;
+    sections.forEach((section)=>{
+      section.classList.remove("active");
+    });
+    const req = document.getElementsByClassName(`pagina${id}`);
+    req[0].classList.add("active");
+  });
+});
+
 // data halen uit de json database
 async function getData(mf, p) {
     // mf = mapfile
@@ -178,25 +197,32 @@ function reLoad(id, value) {
     }, 1500);
 
 }
+// ALERT FUNCTIE
+function createAlert(tekst) {
+    let alert, bttn;
+    let container = document.querySelector("#container");
 
-const buttons = document.querySelectorAll("button");
-const sections = document.querySelectorAll(".pagina");
+    alert = document.createElement("div");
+    bttn = document.createElement("button");
+    alert.classList.add("alert");
+    alert.innerHTML = `
+    
+        <p>${tekst}</p>
+        <button type="button" class="cross"></button>
+   `;
+    bttn.classList.add("cross");
+    bttn.type="button";
+    bttn.innerHTML = "<i class='bx bx-x'></i>";
 
-
-buttons.forEach((btn)=>{
-  btn.addEventListener("click", ()=>{
-    buttons.forEach((btn)=>{
-      btn.classList.remove("active");
+    bttn.addEventListener("click",(e)=>{
+        e.preventDefault;
+        alert.remove();
     });
-    btn.classList.add("active");
-    const id = btn.id;
-    sections.forEach((section)=>{
-      section.classList.remove("active");
-    });
-    const req = document.getElementsByClassName(`pagina${id}`);
-    req[0].classList.add("active");
-  });
-});
+    alert.appendChild(bttn);
+    container.appendChild(alert);
+
+
+}
 
 // HTML ELEMENTS
 const input = document.querySelectorAll("input"); // selecteren van alle input elementen
@@ -230,6 +256,112 @@ document.querySelector("#uilen_onderwerp");
 document.querySelector("#uilen_verzender");
 document.querySelector("#uilen_inhoud");
 
+let koffer_type = userKoffer.ktype;
+let koffer_type_naam, koffer_max_items;
+
+
+function getKoffertype() {
+    /* KOFFER TYPE  
+        Deze functie checkt wat voor koffer je hebt, hierdoor opent je bepaalde functies in het spel.
+*/
+    switch (koffer_type) {
+        case '1':
+
+            koffer_type_naam = "Luxe Koffer";
+            return koffer_max_items = 20;
+
+        default:
+
+            koffer_type_naam = "Standaard Koffer";
+            return koffer_max_items = 10;
+
+    }
+
+
+}
+
+// deze functie moet herschreven worden.
+function getitem() {
+    let items = JSON.parse(userKoffer.voorwerpen);
+    items.push({ db: "drinks", item: 0 }, {db: "owls", item: 3});
+    setSave("voorwerpen", JSON.stringify(items));
+}
+
+
+function getKoffer() {
+    /* KOFFER
+        Deze functie laat de voorwerpen zien die je hebt zitten.
+        Alles wordt geladen vanuit de js/data/../.json
+*/
+// deze lets moeten allemaal naar select.js
+    let koffer_buttons = document.querySelector(".koffer_btns"); 
+    let koffer_naam = document.querySelector("#js_koffer_naam");
+    let aantal_voorwerpen = document.querySelector("#js_aantal_voorwerpen");
+    let max_voorwerpen = document.querySelector("#js_max_voorwerpen");
+    let items_container = document.querySelector(".items_container");
+    let preview_container = document.querySelector(".preview_container");
+
+    let voorwerpen = JSON.parse(userKoffer.voorwerpen);
+    let button;
+
+    // AANSPREKEN VAN DE KOFFER TYPE FUNCTIE 
+    getKoffertype(); 
+    preview_container.innerHTML = "Klik op een voorwerp."; // injecteren van een de start tekst
+    // als je een standaard koffer hebt, heb je geen filter
+    if (userKoffer.ktype == 0) {
+        koffer_buttons.innerHTML = "<br>";
+    }
+
+    // INJECTEREN VAN DE HTML MET DE BASIS INFORMATIE.
+    koffer_naam.innerHTML = koffer_type_naam; // KOFFER NAAM
+    aantal_voorwerpen.innerHTML = voorwerpen.length; // AANTAL VOORWERPEN
+    max_voorwerpen.innerHTML = koffer_max_items; // MAX ITEMS TOEGELATEN VOLGENS KOFFER TYPE
+
+    // INVOEGEN VAN DE ITEMS
+    if (voorwerpen.length === 0) {
+        // ALS JE GEEN VOORWERPEN HEBT : 
+        items_container.innerHTML = "Je hebt geen voorwerpen in je koffer.";
+    } else {
+
+        items_container.innerHTML = ""; // RESETTEN VAN DE ITEMS_CONTAINERS
+        for (let x = 0; x < voorwerpen.length; x++) {
+            // button aanmaken
+            button = document.createElement("button");
+            button.type = "button"; // type van de bttn
+            button.innerHTML = `<img src="./assets/items/${voorwerpen[x]["db"]}/${voorwerpen[x]["item"]}.svg" alt="">`; // img vd button
+
+            button.addEventListener("click", (e)=>{
+                e.preventDefault;
+                // OPVRAGEN VAN DE DATA VOOR HET VOORWERP
+                getData("items", voorwerpen[x]["db"])
+                .then(items =>{
+
+                    let db_item = items.db.items[voorwerpen[x]["item"]];
+                    preview_container.innerHTML = `
+                    <div class="preview">
+                                    <h4>${db_item.naam}</h4>
+                                    <div class="preview_img">
+                                        <img src="./assets/items/${voorwerpen[x]["db"]}/${voorwerpen[x]["item"]}.svg" alt="">
+                                    </div>
+                                </div>
+                                <!-- PREVIEW INFO -->
+                                <div class="preview_info">
+                                    <p>${db_item.omschrijving}</p>
+                                    
+                                  
+                                </div>
+                                `;
+                });
+            });
+
+            items_container.appendChild(button);
+
+        }
+    }
+
+
+}
+
 /*   == SIGNUP.JS  ==   
  - aanmaken van de gebruiker - createUser() 
  - inloggen van de gebruiker
@@ -237,6 +369,7 @@ document.querySelector("#uilen_inhoud");
 */
 
 let status = user.status;
+let item =  [];
 
 // AANMAKEN VAN DE USER
 function createUser() {
@@ -290,11 +423,11 @@ function createUser() {
     // checken of de user.status al is ingevuld
     // zo niet kan de gebruiker niet registreren
     if (user.status !== null && page == "./register.html") {
-        console.log("je kan niet registreren"); // dit wordt een alert
+        createAlert("Je kan niet registreren.");
     }
     else if (inputBL === false) {
         // Als er nog lege velden zijn
-        console.log("Er zijn nog lege velden!"); // dit wordt een alert
+        createAlert("Er zijn nog lege velden!");
     }
     else if (inputBL === true && dateCheck === true) {
         //invoegen van de values.
@@ -313,8 +446,8 @@ function createUser() {
         setSave("punten", 0);
 
         // locatie informatie
-        setSave("locatie", "geen");
-        setSave("plaats", "geen");
+        setSave("locatie", "ww");
+        setSave("plaats", 0);
 
         // meta informatie
         setSave("status", "offline");
@@ -322,6 +455,7 @@ function createUser() {
         setSave("versie", version);
         setSave("logincount", 0);
         setSave("speeltijd", 0);
+        setSave("sluip", "Nergens");
 
         //uilen
         setSave("uilen", JSON.stringify(["0", "1"]));
@@ -355,9 +489,8 @@ function createUser() {
         setSave("sieraad", "Niets");
 
         //koffer
-        setSave("items", 0);
-        setSave("maxitems", 10);
-        setSave("voorwerpen", JSON.stringify({ naam: "aap", type: "health", value: 1 }));
+        setSave("ktype", 0);
+        setSave("voorwerpen",JSON.stringify(item));
 
         //tijden
         setSave("hongertijd", d$2.setMinutes(d$2.getMinutes() + 5));
@@ -376,10 +509,10 @@ function createUser() {
         haarkleur.value = "";
         oogkleur.value = "";
 
+        getitem();
+        createAlert("Je bent succesvol geregistreerd! Even geduld...<br>Klik daarna op inloggen!");
 
-        console.log("Tis gelukt"); // moet een alert worden en auto login
-
-
+        reLoad("replace","gasten");
     }
 
 
@@ -394,17 +527,17 @@ function loginUser() {
         setSave("status", status);
         setSave("logincount", loginCount);
         setSave("lastlogin",d$2.getTime());
+        createAlert("Succesvol ingelogd!");
         setTimeout(() => {
             window.location.replace("/index.html");
         }, 500);
     } else if (status === null) {
         //Als je geen account hebt
-        console.log("geen account");
+        createAlert("Je hebt geen account!");
     } else if(status ==="online") {
         //Als er andere problemen voort doen stuur naar 404 pagina.
-        reLoad("replace", "index");
+        reLoad("replace", "404");
     }
-
 
 }
 // UITLOGGEN VAN DE GEBRUIKER
@@ -522,7 +655,7 @@ function checkTijd() {
     // Dag en Nacht
   switch (true) {
     // NACHT
-    case (page == "/locaties.html" && uur >= 20 || uur <= 6 ):
+    case (page == "/locaties.html" && uur >= 23 || uur <= 6 ):
         winkels.innerHTML = "De winkels zijn gesloten kom later terug!";
         setSave("sluip", "Wegisweg");
         break;
@@ -532,8 +665,10 @@ function checkTijd() {
 let footerText, pageTitle;
 let lnav ,rnav;
 let d = new Date();
-let uil = JSON.parse(userUilen.uilen);
-
+let uil =[];
+if(user.status ==="online"){
+ uil = JSON.parse(userUilen.uilen);
+}
 pageTitle = document.querySelector(".page-title").innerHTML;
 footerText = `&copy ${sitetitle}`;
 
@@ -807,105 +942,6 @@ document.addEventListener('alpine:init', () => {
 
     });
 });
-
-let koffer_type = userKoffer.ktype;
-let koffer_type_naam, koffer_max_items;
-
-
-function getKoffertype() {
-    /* KOFFER TYPE  
-        Deze functie checkt wat voor koffer je hebt, hierdoor opent je bepaalde functies in het spel.
-*/
-    switch (koffer_type) {
-        case '1':
-
-            koffer_type_naam = "Luxe Koffer";
-            return koffer_max_items = 20;
-
-        default:
-
-            koffer_type_naam = "Standaard Koffer";
-            return koffer_max_items = 10;
-
-    }
-
-
-}
-
-
-function getKoffer() {
-    /* KOFFER
-        Deze functie laat de voorwerpen zien die je hebt zitten.
-        Alles wordt geladen vanuit de js/data/../.json
-*/
-// deze lets moeten allemaal naar select.js
-    let koffer_buttons = document.querySelector(".koffer_btns"); 
-    let koffer_naam = document.querySelector("#js_koffer_naam");
-    let aantal_voorwerpen = document.querySelector("#js_aantal_voorwerpen");
-    let max_voorwerpen = document.querySelector("#js_max_voorwerpen");
-    let items_container = document.querySelector(".items_container");
-    let preview_container = document.querySelector(".preview_container");
-
-    let voorwerpen = JSON.parse(userKoffer.voorwerpen);
-    let button;
-
-    // AANSPREKEN VAN DE KOFFER TYPE FUNCTIE 
-    getKoffertype(); 
-    preview_container.innerHTML = "Klik op een voorwerp."; // injecteren van een de start tekst
-    // als je een standaard koffer hebt, heb je geen filter
-    if (userKoffer.ktype == 0) {
-        koffer_buttons.innerHTML = "<br>";
-    }
-
-    // INJECTEREN VAN DE HTML MET DE BASIS INFORMATIE.
-    koffer_naam.innerHTML = koffer_type_naam; // KOFFER NAAM
-    aantal_voorwerpen.innerHTML = voorwerpen.length; // AANTAL VOORWERPEN
-    max_voorwerpen.innerHTML = koffer_max_items; // MAX ITEMS TOEGELATEN VOLGENS KOFFER TYPE
-
-    // INVOEGEN VAN DE ITEMS
-    if (voorwerpen.length === 0) {
-        // ALS JE GEEN VOORWERPEN HEBT : 
-        items_container.innerHTML = "Je hebt geen voorwerpen in je koffer.";
-    } else {
-
-        items_container.innerHTML = ""; // RESETTEN VAN DE ITEMS_CONTAINERS
-        for (let x = 0; x < voorwerpen.length; x++) {
-            // button aanmaken
-            button = document.createElement("button");
-            button.type = "button"; // type van de bttn
-            button.innerHTML = `<img src="./assets/items/${voorwerpen[x]["db"]}/${voorwerpen[x]["item"]}.svg" alt="">`; // img vd button
-
-            button.addEventListener("click", (e)=>{
-                e.preventDefault;
-                // OPVRAGEN VAN DE DATA VOOR HET VOORWERP
-                getData("items", voorwerpen[x]["db"])
-                .then(items =>{
-
-                    let db_item = items.db.items[voorwerpen[x]["item"]];
-                    preview_container.innerHTML = `
-                    <div class="preview">
-                                    <h4>${db_item.naam}</h4>
-                                    <div class="preview_img">
-                                        <img src="./assets/items/${voorwerpen[x]["db"]}/${voorwerpen[x]["item"]}.svg" alt="">
-                                    </div>
-                                </div>
-                                <!-- PREVIEW INFO -->
-                                <div class="preview_info">
-                                    <p>${db_item.omschrijving}</p>
-                                    
-                                  
-                                </div>
-                                `;
-                });
-            });
-
-            items_container.appendChild(button);
-
-        }
-    }
-
-
-}
 
 let locatie, plaats;
 
