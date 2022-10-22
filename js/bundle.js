@@ -61,6 +61,8 @@ let userStats = {
     "sikkels": localStorage.getItem("sikkels"), // 1 sikkel -> 29 knoeten
     "knoeten": localStorage.getItem("knoeten"), // 1 knoet
 
+    "sluip": localStorage.getItem("sluip") // de string die wordt opgeslaan voor de sluipwegwijzer
+
 };
 // kenmerken over het karakter
 ({
@@ -223,6 +225,9 @@ document.querySelector("#uilvakin");
 document.querySelector("#uilen_onderwerp");
 document.querySelector("#uilen_verzender");
 document.querySelector("#uilen_inhoud");
+
+
+document.querySelector("#sluip");
 
 /*   == SIGNUP.JS  ==   
  - aanmaken van de gebruiker - createUser() 
@@ -581,12 +586,12 @@ rnav = `
     <span x-text="username"></span>
 </div>
 
-<div class="locatie_info">
-    <div class="locatie">
+<div class="locatie_info"  >
+    <div class="locatie" x-data="sluip">
         <i class='bx bx-current-location'></i>
-        <a href="./sluip.html" x-text="plaats">Wegisweg (noord)</a>
+        <a href="./sluip.html" x-text="sluip" id="sluip">Wegisweg (noord)</a>
     </div>
-    <div class="tijd" x-data="time">
+    <div class="tijd" x-data="interval">
         <i class='bx bx-time-five'></i>
         <span x-text="tijd">22:00</span>
     </div>
@@ -659,12 +664,13 @@ document.addEventListener('alpine:init', () => {
             sikkel : `${userStats.sikkels}`,
             knoet : `${userStats.knoeten}`,
             uilen : `${uil.length}`,
+           
         }
         
 
 
     });
-    Alpine.data('time',()=>{
+    Alpine.data('interval',()=>{
         return {
             tijd: `${d.toLocaleTimeString('nl-NL')}`,
             init(){
@@ -677,6 +683,13 @@ document.addEventListener('alpine:init', () => {
               }, 1000);
               
             }
+        }
+
+    });
+    Alpine.data('sluip',()=>{
+        return {
+            sluip: `${userStats.sluip}`,
+        
         }
 
     });
@@ -800,11 +813,6 @@ shop_list = document.querySelector(".winkel_items");
 locatie = user.locatie;
 plaats = user.plaats;
 
-
-
-
-
-
 function getLocatie() {
   if (user.status === "online" && page === "/locaties.html") {
     return getData("locaties", locatie)
@@ -832,6 +840,10 @@ function getLocatie() {
               subli.addEventListener("click", (e) => {
                 let active = document.querySelector(".js_active");
                 let winkel_active = document.querySelector(".winkel_active");
+                let sluip = document.querySelector("#sluip");
+                setSave("sluip", dbpl.sub[y]["sb-naam"]);
+                sluip.innerHTML =  dbpl.sub[y]["sb-naam"];
+  
                 e.target.classList.add("winkel_active");
                 // als er al een winkel actief is 
                 if(active !== null){

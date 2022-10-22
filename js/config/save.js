@@ -54,6 +54,8 @@ let userStats = {
     "sikkels": localStorage.getItem("sikkels"), // 1 sikkel -> 29 knoeten
     "knoeten": localStorage.getItem("knoeten"), // 1 knoet
 
+    "sluip": localStorage.getItem("sluip") // de string die wordt opgeslaan voor de sluipwegwijzer
+
 }
 // kenmerken over het karakter
 let userKarakter = {

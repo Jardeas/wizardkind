@@ -3,6 +3,8 @@ import { user, userStats, userUilen } from "../config/save";
 import { acces } from "./access";
 import { autoLogout, checkDag } from "./tijd";
 
+
+
 let footerText, pageTitle;
 let lnav ,rnav;
 let d = new Date();
@@ -74,12 +76,12 @@ rnav = `
     <span x-text="username"></span>
 </div>
 
-<div class="locatie_info">
-    <div class="locatie">
+<div class="locatie_info"  >
+    <div class="locatie" x-data="sluip">
         <i class='bx bx-current-location'></i>
-        <a href="./sluip.html" x-text="plaats">Wegisweg (noord)</a>
+        <a href="./sluip.html" x-text="sluip" id="sluip">Wegisweg (noord)</a>
     </div>
-    <div class="tijd" x-data="time">
+    <div class="tijd" x-data="interval">
         <i class='bx bx-time-five'></i>
         <span x-text="tijd">22:00</span>
     </div>
@@ -152,12 +154,13 @@ document.addEventListener('alpine:init', () => {
             sikkel : `${userStats.sikkels}`,
             knoet : `${userStats.knoeten}`,
             uilen : `${uil.length}`,
+           
         }
         
 
 
     });
-    Alpine.data('time',()=>{
+    Alpine.data('interval',()=>{
         return{
             tijd: `${d.toLocaleTimeString('nl-NL')}`,
             init(){
@@ -170,6 +173,13 @@ document.addEventListener('alpine:init', () => {
               }, 1000);
               
             }
+        }
+
+    });
+    Alpine.data('sluip',()=>{
+        return{
+            sluip: `${userStats.sluip}`,
+        
         }
 
     });

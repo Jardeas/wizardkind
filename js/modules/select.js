@@ -27,3 +27,6 @@ export const uilvakin = document.querySelector("#uilvakin");
 export const uilen_onderwerp = document.querySelector("#uilen_onderwerp");
 export const uilen_verzender = document.querySelector("#uilen_verzender");
 export const uilen_inhoud = document.querySelector("#uilen_inhoud");
+
+
+export const sluip = document.querySelector("#sluip");

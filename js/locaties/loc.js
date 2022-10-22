@@ -1,7 +1,8 @@
 import { page, sitetitle } from "../config/meta";
-import { user } from "../config/save";
-import { getData } from "../modules/funct";
-import { locnaam, pagetitle, plLijst, plnaam, shopnaam, winkel } from "../modules/select";
+import { user, userStats } from "../config/save";
+import { getData, setSave } from "../modules/funct";
+import { locnaam, pagetitle, plLijst, plnaam, shopnaam, sluip, winkel } from "../modules/select";
+
 
 let locatie, plaats;
 
@@ -42,8 +43,12 @@ export function getLocatie() {
               subli.innerHTML = sbNaam;
               // event listener voor het element
               subli.addEventListener("click", (e) => {
-                let active = document.querySelector(".js_active")
-                let winkel_active = document.querySelector(".winkel_active")
+                let active = document.querySelector(".js_active");
+                let winkel_active = document.querySelector(".winkel_active");
+                let sluip = document.querySelector("#sluip");
+                setSave("sluip", dbpl.sub[y]["sb-naam"]);
+                sluip.innerHTML =  dbpl.sub[y]["sb-naam"]
+  
                 e.target.classList.add("winkel_active");
                 // als er al een winkel actief is 
                 if(active !== null){
