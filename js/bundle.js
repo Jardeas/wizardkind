@@ -179,32 +179,6 @@ function reLoad(id, value) {
 
 }
 
-function createAlert(tekst) {
-    let alert, bttn;
-    let container = document.querySelector("#container");
-
-    alert = document.createElement("div");
-    bttn = document.createElement("button");
-    alert.classList.add("alert");
-    alert.innerHTML = `
-    
-        <p>${tekst}</p>
-        <button type="button" class="cross"></button>
-   `;
-    bttn.classList.add("cross");
-    bttn.type="button";
-    bttn.innerHTML = "<i class='bx bx-x'></i>";
-
-    bttn.addEventListener("click",(e)=>{
-        e.preventDefault;
-        alert.remove();
-    });
-    alert.appendChild(bttn);
-    container.appendChild(alert);
-
-
-}
-
 const buttons = document.querySelectorAll("button");
 const sections = document.querySelectorAll(".pagina");
 
@@ -560,12 +534,7 @@ let lnav ,rnav;
 let d = new Date();
 let uil = JSON.parse(userUilen.uilen);
 
-createAlert("<img src='../assets/items/frog.svg'>");
-
 pageTitle = document.querySelector(".page-title").innerHTML;
-
-
-
 footerText = `&copy ${sitetitle}`;
 
 document.title = sitetitle + " | " + pageTitle;
@@ -689,9 +658,6 @@ rnav = `
 
 
 `;
-
-
-
 
 // GENERATE BASE LAYOUT
 document.addEventListener('alpine:init', () => {
@@ -996,8 +962,6 @@ function getLocatie() {
                 }
 
                 if (locatie == "ww" || locatie == "hogm") {
-
-
                   // html injectie voor de shops
                   sbNaam = dbpl.sub[y]["sb-naam"];
                   db = dbpl.sub[y]["db"];

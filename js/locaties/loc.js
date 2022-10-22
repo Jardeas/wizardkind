@@ -60,8 +60,6 @@ export function getLocatie() {
                 }
 
                 if (locatie == "ww" || locatie == "hogm") {
-
-
                   // html injectie voor de shops
                   sbNaam = dbpl.sub[y]["sb-naam"];
                   db = dbpl.sub[y]["db"];

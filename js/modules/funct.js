@@ -1,3 +1,6 @@
+import { userStats } from "../config/save";
+
+
 // data halen uit de json database
 export async function getData(mf, p) {
     // mf = mapfile
@@ -57,4 +60,23 @@ export function createAlert(tekst) {
     container.appendChild(alert);
 
 
+}
+
+// CURRENCY OMZETTEN
+export function currency(){
+    let galjoenen, sikkels, knoeten;
+    let overschot;
+    galjoenen = userStats.galjoenen;
+    sikkels = userStats.sikkels;
+    knoeten = userStats.knoeten;
+
+   switch (true) {
+    case (sikkels >= 17):
+        
+        break;
+   
+    default:
+        break;
+   }
+    
 }
