@@ -224,9 +224,6 @@ document.querySelector("#uilen_onderwerp");
 document.querySelector("#uilen_verzender");
 document.querySelector("#uilen_inhoud");
 
-// Shops
-document.querySelector("#shops");
-
 /*   == SIGNUP.JS  ==   
  - aanmaken van de gebruiker - createUser() 
  - inloggen van de gebruiker
@@ -823,7 +820,8 @@ function getLocatie() {
             dbpl = dbloc.plaatsen[x];
             plNaam = dbpl["pl-naam"];
             plnaam.innerHTML = plNaam;
-
+        
+            document.title = sitetitle + " | " + plNaam; // moet nog veranderd worden
             // opstellen van de subplaatsen lijst
             for (let y = 0; y < dbpl.sub.length; y++) {
               subli = document.createElement("li");

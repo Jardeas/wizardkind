@@ -1,7 +1,7 @@
-import { page } from "../config/meta";
+import { page, sitetitle } from "../config/meta";
 import { user } from "../config/save";
 import { getData } from "../modules/funct";
-import { locnaam, plLijst, plnaam, shopnaam, winkel } from "../modules/select";
+import { locnaam, pagetitle, plLijst, plnaam, shopnaam, winkel } from "../modules/select";
 
 let locatie, plaats;
 
@@ -16,11 +16,6 @@ shop_list = document.querySelector(".winkel_items");
 
 locatie = user.locatie;
 plaats = user.plaats;
-
-
-
-
-
 
 export function getLocatie() {
   if (user.status === "online" && page === "/locaties.html") {
@@ -37,7 +32,8 @@ export function getLocatie() {
             dbpl = dbloc.plaatsen[x];
             plNaam = dbpl["pl-naam"]
             plnaam.innerHTML = plNaam;
-
+        
+            document.title = sitetitle + " | " + plNaam; // moet nog veranderd worden
             // opstellen van de subplaatsen lijst
             for (let y = 0; y < dbpl.sub.length; y++) {
               subli = document.createElement("li");
