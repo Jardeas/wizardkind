@@ -10,7 +10,10 @@ let lnav ,rnav;
 let d = new Date();
 let uil = JSON.parse(userUilen.uilen);
 
+
+
 pageTitle = document.querySelector(".page-title").innerHTML;
+
 
 
 footerText = `&copy ${sitetitle}`;

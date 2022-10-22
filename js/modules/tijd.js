@@ -108,14 +108,16 @@ export function checkDag() {
 
 export function checkTijd() {
     let winkels = document.querySelector(".wegisweg_container");
+    
     // Dag en Nacht
-   
-    if (uur < 7 || uur > 19) {
-       console.log("dag");
-
-    }
-    else if(page == "/locaties.html" && uur >= 20 || uur <= 7 ){
-        setSave("sluip", "Wegisweg")
-        winkels.innerHTML = `<div class="winkels><h3 id="js-pl-naam">De winkels zijn momenteel gesloten, kom later terug!</h3></div>`
-    }
+  switch (true) {
+    // NACHT
+    case (page == "/locaties.html" && uur >= 20 || uur <= 6 ):
+        winkels.innerHTML = "De winkels zijn gesloten kom later terug!"
+        setSave("sluip", "Wegisweg");
+        break;
+    default:
+        // DAG
+        break;
+  }
 }

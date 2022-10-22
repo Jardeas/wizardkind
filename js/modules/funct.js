@@ -32,3 +32,4 @@ export function reLoad(id,value){
     }, 1500);
 
 }
+
