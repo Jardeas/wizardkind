@@ -50,6 +50,11 @@
                     },
                     {
                         "sb-naam": "Obscurus Boeken"
+                    },
+                    {
+                        "sb-naam": "Morads Magische Koffers & Tassen",
+                        "db": "other",
+                        "items": [0,1]
                     }
                 ]
             }

@@ -78,11 +78,10 @@ let userStats = {
     "sieraad": localStorage.getItem("sieraad"), // dragen van 1 juweel (ring, halsband, armband) 
 });
 // de inventory van de gebruiker
-({
-    "items": localStorage.getItem("items"), // het aantal items in de koffer
-    "maxitems": localStorage.getItem("maxitems"), // de max-items die toegelaten is in de koffer
+let userKoffer = {
+    "ktype": localStorage.getItem("ktype"), // het koffer type 
     "voorwerpen": localStorage.getItem("voorwerpen"), // array van de voorwerpen die zich bevinden in de koffer
-});
+};
 // de inventory van de gebruiker
 let userTijd = {
     "lastlogin": localStorage.getItem("lastlogin"), // wanneer je laatst ingelogd
@@ -106,7 +105,8 @@ let guest = [
     "gasten"
 ];
 let memb = [
-    "register"
+    "register",
+    "gasten"
 ];
 let count;
 // GUEST CHECK
@@ -219,15 +219,16 @@ const shopnaam= document.querySelector("#js-shop-naam"); // selecteren van de ID
 const winkel= document.querySelector(".winkel"); // selecteren van de ID "shppnaam"
 
 
+
+// KOFFER
+
+
 // Uilen
 document.querySelector("#uilvakin");
 
 document.querySelector("#uilen_onderwerp");
 document.querySelector("#uilen_verzender");
 document.querySelector("#uilen_inhoud");
-
-
-document.querySelector("#sluip");
 
 /*   == SIGNUP.JS  ==   
  - aanmaken van de gebruiker - createUser() 
@@ -799,6 +800,104 @@ document.addEventListener('alpine:init', () => {
     });
 });
 
+let koffer_type = userKoffer.ktype;
+let koffer_type_naam, koffer_max_items;
+
+
+function getKoffertype() {
+    /* KOFFER TYPE  
+        Deze functie checkt wat voor koffer je hebt, hierdoor opent je bepaalde functies in het spel.
+*/
+    switch (koffer_type) {
+        case '1':
+
+            koffer_type_naam = "Luxe Koffer";
+            return koffer_max_items = 20;
+
+        default:
+
+            koffer_type_naam = "Standaard Koffer";
+            return koffer_max_items = 10;
+
+    }
+
+
+}
+
+
+function getKoffer() {
+    /* KOFFER
+        Deze functie laat de voorwerpen zien die je hebt zitten.
+        Alles wordt geladen vanuit de js/data/../.json
+*/
+// deze lets moeten allemaal naar select.js
+    let koffer_buttons = document.querySelector(".koffer_btns"); 
+    let koffer_naam = document.querySelector("#js_koffer_naam");
+    let aantal_voorwerpen = document.querySelector("#js_aantal_voorwerpen");
+    let max_voorwerpen = document.querySelector("#js_max_voorwerpen");
+    let items_container = document.querySelector(".items_container");
+    let preview_container = document.querySelector(".preview_container");
+
+    let voorwerpen = JSON.parse(userKoffer.voorwerpen);
+    let button;
+
+    // AANSPREKEN VAN DE KOFFER TYPE FUNCTIE 
+    getKoffertype(); 
+    preview_container.innerHTML = "Klik op een voorwerp."; // injecteren van een de start tekst
+    // als je een standaard koffer hebt, heb je geen filter
+    if (userKoffer.ktype == 0) {
+        koffer_buttons.innerHTML = "<br>";
+    }
+
+    // INJECTEREN VAN DE HTML MET DE BASIS INFORMATIE.
+    koffer_naam.innerHTML = koffer_type_naam; // KOFFER NAAM
+    aantal_voorwerpen.innerHTML = voorwerpen.length; // AANTAL VOORWERPEN
+    max_voorwerpen.innerHTML = koffer_max_items; // MAX ITEMS TOEGELATEN VOLGENS KOFFER TYPE
+
+    // INVOEGEN VAN DE ITEMS
+    if (voorwerpen.length === 0) {
+        // ALS JE GEEN VOORWERPEN HEBT : 
+        items_container.innerHTML = "Je hebt geen voorwerpen in je koffer.";
+    } else {
+
+        items_container.innerHTML = ""; // RESETTEN VAN DE ITEMS_CONTAINERS
+        for (let x = 0; x < voorwerpen.length; x++) {
+            // button aanmaken
+            button = document.createElement("button");
+            button.type = "button"; // type van de bttn
+            button.innerHTML = `<img src="./assets/items/${voorwerpen[x]["db"]}/${voorwerpen[x]["item"]}.svg" alt="">`; // img vd button
+
+            button.addEventListener("click", (e)=>{
+                e.preventDefault;
+                // OPVRAGEN VAN DE DATA VOOR HET VOORWERP
+                getData("items", voorwerpen[x]["db"])
+                .then(items =>{
+
+                    let db_item = items.db.items[voorwerpen[x]["item"]];
+                    preview_container.innerHTML = `
+                    <div class="preview">
+                                    <h4>${db_item.naam}</h4>
+                                    <div class="preview_img">
+                                        <img src="./assets/items/${voorwerpen[x]["db"]}/${voorwerpen[x]["item"]}.svg" alt="">
+                                    </div>
+                                </div>
+                                <!-- PREVIEW INFO -->
+                                <div class="preview_info">
+                                    <p>${db_item.omschrijving}</p>
+                                  
+                                </div>
+                                `;
+                });
+            });
+
+            items_container.appendChild(button);
+
+        }
+    }
+
+
+}
+
 let locatie, plaats;
 
 let dbloc, dbpl, dbsub, lcNaam, plNaam, sbNaam, db, dbitems;
@@ -806,6 +905,7 @@ let dbloc, dbpl, dbsub, lcNaam, plNaam, sbNaam, db, dbitems;
 let subli;
 
 let shop_items, shop_list, shop_item;
+let dis, btn_in;
 
 shop_list = document.querySelector(".winkel_items");
 
@@ -828,7 +928,7 @@ function getLocatie() {
             dbpl = dbloc.plaatsen[x];
             plNaam = dbpl["pl-naam"];
             plnaam.innerHTML = plNaam;
-        
+
             document.title = sitetitle + " | " + plNaam; // moet nog veranderd worden
             // opstellen van de subplaatsen lijst
             for (let y = 0; y < dbpl.sub.length; y++) {
@@ -840,18 +940,18 @@ function getLocatie() {
               subli.addEventListener("click", (e) => {
                 let active = document.querySelector(".js_active");
                 let winkel_active = document.querySelector(".winkel_active");
-                let sluip = document.querySelector("#sluip");
-                setSave("sluip", dbpl.sub[y]["sb-naam"]);
-                sluip.innerHTML =  dbpl.sub[y]["sb-naam"];
-  
+                let sluip = document.querySelector("#sluip"); // id van de sluip selecteren
+                setSave("sluip", dbpl.sub[y]["sb-naam"]); // data in de sluip opslaan
+                sluip.innerHTML = dbpl.sub[y]["sb-naam"]; // injecteren in de html
+
                 e.target.classList.add("winkel_active");
                 // als er al een winkel actief is 
-                if(active !== null){
+                if (active !== null) {
                   active.innerHTML = "";
                   shop_list.classList.remove("js_active");
                   winkel_active.classList.remove("winkel_active");
                 }
-             
+
                 if (locatie == "ww" || locatie == "hogm") {
 
 
@@ -861,15 +961,23 @@ function getLocatie() {
                   dbitems = dbpl.sub[y]["items"];
                   shopnaam.innerHTML = sbNaam;
                   shop_list.classList.add("js_active");
+                  // CHECKEN OF DE KOFFER VOL ZIT 
+                  if (userKoffer.voorwerpen.length == getKoffertype()) {
+                    dis = "disabled";
+                    btn_in = "Koffer vol";
+                  }else {
+                    btn_in = "Koop";
+                  }
+
                   getData("items", db)
                     .then(items => {
                       shop_items = items.db.items;
-                      
+
                       for (let i = 0; i < shop_items.length; i++) {
                         for (let w = 0; w < dbitems.length; w++) {
 
                           if (dbitems[w] == i) {
-                           
+
                             shop_item = document.createElement("li");
                             shop_item.classList.add("winkel_item");
                             shop_item.innerHTML = `
@@ -887,7 +995,7 @@ function getLocatie() {
                                     <option value="20">20x</option>
                                     <option value="30">30x</option>
                                 </select>
-                                <button class="btn">Kopen</button>
+                                <button class="btn" ${dis}>${btn_in}</button>
                             </div>
                             <p>${shop_items[i]["omschrijving"]}</p>
                         
@@ -898,11 +1006,13 @@ function getLocatie() {
 
                       }
                       winkel.appendChild(shop_list);
+
                     });
 
 
+
                 }
-                
+
 
 
               });
@@ -1003,5 +1113,8 @@ switch (page) {
         break;
     case "/locaties.html":
         getLocatie();
+        break;
+    case "/koffer.html":
+        getKoffer();
         break;
 }

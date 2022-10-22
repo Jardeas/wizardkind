@@ -5,6 +5,7 @@
 import { page } from "../config/meta";
 import { getLocatie } from "../locaties/loc";
 import { bttn_aanmaken, bttn_inloggen } from "../modules/select";
+import { getKoffer } from "./koffer";
 import { createUser, loginUser } from "./signup";
 import { checkUilen } from "./uilen";
 
@@ -27,6 +28,9 @@ switch (page) {
         break;
     case "/locaties.html":
         getLocatie();
+        break;
+    case "/koffer.html":
+        getKoffer();
         break;
 
     default:

@@ -6,7 +6,8 @@ let guest = [
     "gasten"
 ];
 let memb = [
-    "register"
+    "register",
+    "gasten"
 ];
 let count;
 // GUEST CHECK

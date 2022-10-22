@@ -72,8 +72,7 @@ let userKarakter = {
 }
 // de inventory van de gebruiker
 let userKoffer = {
-    "items": localStorage.getItem("items"), // het aantal items in de koffer
-    "maxitems": localStorage.getItem("maxitems"), // de max-items die toegelaten is in de koffer
+    "ktype": localStorage.getItem("ktype"), // het koffer type 
     "voorwerpen": localStorage.getItem("voorwerpen"), // array van de voorwerpen die zich bevinden in de koffer
 }
 // de inventory van de gebruiker

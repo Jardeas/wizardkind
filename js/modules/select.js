@@ -21,6 +21,10 @@ export const shopnaam= document.querySelector("#js-shop-naam"); // selecteren va
 export const winkel= document.querySelector(".winkel"); // selecteren van de ID "shppnaam"
 
 
+
+// KOFFER
+
+
 // Uilen
 export const uilvakin = document.querySelector("#uilvakin");
 
@@ -29,4 +33,3 @@ export const uilen_verzender = document.querySelector("#uilen_verzender");
 export const uilen_inhoud = document.querySelector("#uilen_inhoud");
 
 
-export const sluip = document.querySelector("#sluip");

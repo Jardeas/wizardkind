@@ -1,7 +1,8 @@
 import { page, sitetitle } from "../config/meta";
-import { user, userStats } from "../config/save";
+import { user, userKoffer, userStats } from "../config/save";
 import { getData, setSave } from "../modules/funct";
 import { locnaam, pagetitle, plLijst, plnaam, shopnaam, sluip, winkel } from "../modules/select";
+import { getKoffertype } from "../user/koffer";
 
 
 let locatie, plaats;
@@ -11,6 +12,7 @@ let dbloc, dbpl, dbsub, lcNaam, plNaam, sbNaam, db, dbitems;
 let subli;
 
 let shop_items, shop_list, shop_item;
+let dis, btn_in;
 
 shop_list = document.querySelector(".winkel_items");
 
@@ -33,7 +35,7 @@ export function getLocatie() {
             dbpl = dbloc.plaatsen[x];
             plNaam = dbpl["pl-naam"]
             plnaam.innerHTML = plNaam;
-        
+
             document.title = sitetitle + " | " + plNaam; // moet nog veranderd worden
             // opstellen van de subplaatsen lijst
             for (let y = 0; y < dbpl.sub.length; y++) {
@@ -45,18 +47,18 @@ export function getLocatie() {
               subli.addEventListener("click", (e) => {
                 let active = document.querySelector(".js_active");
                 let winkel_active = document.querySelector(".winkel_active");
-                let sluip = document.querySelector("#sluip");
-                setSave("sluip", dbpl.sub[y]["sb-naam"]);
-                sluip.innerHTML =  dbpl.sub[y]["sb-naam"]
-  
+                let sluip = document.querySelector("#sluip"); // id van de sluip selecteren
+                setSave("sluip", dbpl.sub[y]["sb-naam"]); // data in de sluip opslaan
+                sluip.innerHTML = dbpl.sub[y]["sb-naam"]; // injecteren in de html
+
                 e.target.classList.add("winkel_active");
                 // als er al een winkel actief is 
-                if(active !== null){
+                if (active !== null) {
                   active.innerHTML = ""
                   shop_list.classList.remove("js_active");
                   winkel_active.classList.remove("winkel_active");
                 }
-             
+
                 if (locatie == "ww" || locatie == "hogm") {
 
 
@@ -66,15 +68,23 @@ export function getLocatie() {
                   dbitems = dbpl.sub[y]["items"];
                   shopnaam.innerHTML = sbNaam;
                   shop_list.classList.add("js_active");
+                  // CHECKEN OF DE KOFFER VOL ZIT 
+                  if (userKoffer.voorwerpen.length == getKoffertype()) {
+                    dis = "disabled";
+                    btn_in = "Koffer vol"
+                  }else{
+                    btn_in = "Koop"
+                  }
+
                   getData("items", db)
                     .then(items => {
                       shop_items = items.db.items;
-                      
+
                       for (let i = 0; i < shop_items.length; i++) {
                         for (let w = 0; w < dbitems.length; w++) {
 
                           if (dbitems[w] == i) {
-                           
+
                             shop_item = document.createElement("li");
                             shop_item.classList.add("winkel_item");
                             shop_item.innerHTML = `
@@ -92,7 +102,7 @@ export function getLocatie() {
                                     <option value="20">20x</option>
                                     <option value="30">30x</option>
                                 </select>
-                                <button class="btn">Kopen</button>
+                                <button class="btn" ${dis}>${btn_in}</button>
                             </div>
                             <p>${shop_items[i]["omschrijving"]}</p>
                         
@@ -103,14 +113,16 @@ export function getLocatie() {
 
                       }
                       winkel.appendChild(shop_list);
-                    })
+
+                    });
+
 
 
                 }
                 else if (locatie == "hog") {
                   // html injectie voor de scholen
                 }
-                
+
 
 
               })
