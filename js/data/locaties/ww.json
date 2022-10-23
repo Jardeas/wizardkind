@@ -20,7 +20,7 @@
                     {
                         "sb-naam": "De Lekke Ketel",
                         "db": "drinks",
-                        "items": [0,1]
+                        "items": [0,1,2]
                     },
                     {
                         "sb-naam": "Florian Fanielje's IJssalon"
@@ -35,7 +35,9 @@
                         "sb-naam": "Madame Mallekin, Gewaden voor Alle Gelegenheden"
                     },
                     {
-                        "sb-naam": "Zwik en Zwachtels Zwerkbalpaleis"
+                        "sb-naam": "Zwik en Zwachtels Zwerkbalpaleis",
+                        "db": "brooms",
+                        "items": [0,1,2]
                     }
                 ]
             },
