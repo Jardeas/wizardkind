@@ -336,7 +336,7 @@
 
         }
 
-        .wegisweg {
+        .locaties {
             
             &_container {
                 @include grid;
@@ -344,10 +344,10 @@
                 gap:1rem;
                 margin: 1rem 0;
 
-                // WINKELS lIJST
-                .winkels {
+                // WINKEL PLAATSEN
+                .plaatsen {
                     
-                    .winkels_lijst {
+                    .plaatsen_lijst {
                         border: 1px solid $color-border;  
                         border-top: 0;
                         overflow-x: auto;
@@ -370,7 +370,7 @@
                             }
                         }
 
-                        .winkel_active {
+                        .plaats_active {
                             background-color: $color-bg-2;
                         }
                     }
