@@ -586,6 +586,48 @@
   font-weight: bold;
   font-style: italic;
 }
+.mid_content .main_content .profiel_header {
+  margin-bottom: 1rem;
+}
+.mid_content .main_content .profiel_inner {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap: 1rem;
+}
+.mid_content .main_content .profiel_inner .persoon img,
+.mid_content .main_content .profiel_inner .info img,
+.mid_content .main_content .profiel_inner .groep img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  padding: 0.2rem;
+  height: 200px;
+  width: 200px;
+  border: 1px solid hsl(0deg, 0%, 70%);
+}
+.mid_content .main_content .profiel_inner .info {
+  border: 1px solid hsl(0deg, 0%, 70%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.mid_content .main_content .profiel_inner .info ul {
+  text-transform: capitalize;
+}
+.mid_content .main_content .profiel_inner .info ul:first-child {
+  font-weight: bold;
+  border-right: 1px solid hsl(0deg, 0%, 70%);
+  text-transform: uppercase;
+  font-style: italic;
+}
+.mid_content .main_content .profiel_inner .info ul:last-child {
+  grid-column: span 2;
+}
+.mid_content .main_content .profiel_inner .info ul li {
+  border-bottom: 1px solid hsl(0deg, 0%, 70%);
+  padding: 0.5rem;
+}
+.mid_content .main_content .profiel_inner .info ul li:last-child {
+  border: none;
+}
 
 .register_btn {
   padding: 0.5rem 1rem;

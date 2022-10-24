@@ -475,5 +475,64 @@
                 }
             }
         }
+
+        .profiel {
+
+            &_header {
+                margin-bottom: 1rem;
+            }
+
+            &_inner {
+                @include grid;
+                grid-template-columns: 200px 1fr 200px;
+                gap: 1rem;
+
+                .persoon,
+                .info,
+                .groep {
+
+                    img {
+                        object-fit: contain;
+                        padding: .2rem;
+                        height: 200px;
+                        width: 200px;
+                        border: 1px solid $color-border;
+                    }
+                }
+
+                .info {
+                    border: 1px solid $color-border;
+                    @include grid;
+                    grid-template-columns: repeat(3, 1fr);
+
+                    ul {
+                        text-transform: capitalize;
+
+                        &:first-child {
+                            font-weight: bold;
+                            border-right: 1px solid $color-border;
+                            text-transform: uppercase;
+                            font-style: italic;
+                        }
+                        &:last-child {
+                            grid-column: span 2;
+                        }
+                        
+                        li {
+                            border-bottom: 1px solid $color-border;
+                            padding: .5rem;
+
+                            &:last-child {
+                                border: none;
+                            }
+
+                        }
+                    }
+
+                }
+
+                
+            }
+        }
     }
 }
