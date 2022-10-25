@@ -191,9 +191,16 @@
                 .brief_info {
                     padding: 2rem;
 
+
                     h4 {
                         font-size: 1.5rem;
                         margin-bottom: .5rem;
+                        font-style: normal;
+                    }
+
+                    h5 {
+                        font-size: 1.2rem;
+                        font-style: normal;
                     }
 
                     p {
@@ -211,6 +218,12 @@
                         h5 {
                             font-weight: bolder;
                         }
+                    }
+
+                    ol {
+                        font-weight: bold;
+                        font-size: .825rem;
+                        padding: 0 1.5rem;
                     }
                 }
             }

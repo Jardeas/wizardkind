@@ -382,6 +382,11 @@
 .mid_content .main_content .brief_container .brief_info h4 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  font-style: normal;
+}
+.mid_content .main_content .brief_container .brief_info h5 {
+  font-size: 1.2rem;
+  font-style: normal;
 }
 .mid_content .main_content .brief_container .brief_info p {
   font-style: italic;
@@ -396,6 +401,11 @@
 }
 .mid_content .main_content .brief_container .brief_info .brief_reward h5 {
   font-weight: bolder;
+}
+.mid_content .main_content .brief_container .brief_info ol {
+  font-weight: bold;
+  font-size: 0.825rem;
+  padding: 0 1.5rem;
 }
 .mid_content .main_content .koffer_btns {
   display: flex;
