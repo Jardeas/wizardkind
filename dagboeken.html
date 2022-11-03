@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./scss/main.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title class="page-title">Dagboeken</title>
+</head>
+<body x-data="temp">
+
+    <!-- HEADER -->
+    <header x-html="header" class="header"></header>
+
+    <!-- MAIN CONENT -->
+    <main class="main_container">
+
+        <!-- LINKER NAVIGATIE  -->
+        <section class='nav_left' id='left-nav' x-html="leftnav"></section>
+
+        <!-- MIDDEN CONTENT --> 
+        <section class='mid_content' id='content'>
+            <!-- HIER WORD CONTENT TUSSEN GEPLAATST-->
+            <div class="main_content" id="container" >
+
+                <!-- DAGBOEKEN -->
+                <div class="dagboeken">
+                    <h3>Dagboeken</h3>
+
+                    <div class="dagboeken_container">
+
+                        <!-- DAGBOEK -->
+                        <div class="dagboek">
+                            <div class="titel">
+                                <p>Jaar 1</p>
+                            </div>
+                            <div class="info">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eligendi et possimus vero minima tempora vel deserunt nisi corrupti fugit necessitatibus itaque, nostrum officiis soluta alias totam! Veniam, accusantium hic?</p>
+                                <a href="" class="btn">Lees deze bladzijde</a>
+                            </div>
+                            <div class="datum">
+                                <p>07-11-1900</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- RECHTER NAVIGATIE  -->
+        <section class='nav_right' id='right-nav' x-html="rightnav"></section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer x-html="footer" class="footer"></footer>
+    
+    
+    <!-- JS SCRIPTS -->
+    <script src="js/main.min.js"></script>
+</body>
+
+</html>

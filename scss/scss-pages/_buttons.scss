@@ -48,3 +48,15 @@
         opacity: .6;
     }
 }
+
+
+.btn {
+    background-color: $color-link;
+    font-weight: bold;
+    padding: .5rem 1rem;
+    color: $color-bg;
+
+    &:hover {
+        opacity: .8;
+    }
+}
