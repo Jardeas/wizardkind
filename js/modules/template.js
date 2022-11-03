@@ -67,7 +67,6 @@ lnav = `
 
 // HTML VOOR DE RECHTSE NAVIGATIE
 rnav = `
-
 <div class="groep_info">
     <img src="./assets/img/zweinstein.png" alt="">
 </div>
@@ -76,7 +75,7 @@ rnav = `
     <span x-text="username"></span>
 </div>
 
-<div class="locatie_info"  >
+<div class="locatie_info">
     <div class="locatie" x-data="sluip">
         <i class='bx bx-current-location'></i>
         <a href="./sluip.html" x-text="sluip" id="sluip">Wegisweg (noord)</a>

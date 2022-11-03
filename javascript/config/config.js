@@ -1,0 +1,1 @@
+let page = window.location.pathname;

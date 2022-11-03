@@ -1,0 +1,20 @@
+{
+    "db": {
+        "items": [
+            {
+                "naam": "Standaard koffer",
+                "omschrijving": "Met deze koffer kan je tot wel 10 items vasthouden.",
+                "g": 25,
+                "s": 0,
+                "k": 3
+            },
+            {
+                "naam": "Luxe Koffer",
+                "omschrijving": "Deze koffer kan wel tot 20 items bijhouden, alsook is er een apart compartiment om uw gewaden te sorteren.",
+                "g": 75,
+                "s": 23,
+                "k": 15
+            }
+        ]
+    }
+}

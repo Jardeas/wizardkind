@@ -1,0 +1,27 @@
+{
+    "db": {
+        "items": [
+            {
+                "naam": "Boterbier",
+                "omschrijving": "Het lijkt op gewoon bier, en je wordt er heerlijk warm van van binnen.",
+                "g": 1,
+                "s": 6,
+                "k": 16
+            },
+            {
+                "naam": "Pompoensapje",
+                "omschrijving": "Vers geperste pompoensap, afgewerkt met herfstelijke kruiden",
+                "g": 1,
+                "s": 2,
+                "k": 5
+            },
+            {
+                "naam": "Cola",
+                "omschrijving": "Vers geperste pompoensap, afgewerkt met herfstelijke kruiden",
+                "g": 1,
+                "s": 4,
+                "k": 28
+            }
+        ]
+    }
+}

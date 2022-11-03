@@ -1,0 +1,65 @@
+{
+    "locatie": {
+        "lc-naam": "De Wegisweg",
+        "plaatsen": [
+            {
+                "pl-naam": "Wegisweg (Noord)",
+                "sub": [
+                   
+                    {
+                        "sb-naam": "Apothekerij"
+                    },
+                    {
+                        "sb-naam": "Braakballen Uilenboetiek",
+                        "db": "owls",
+                        "items": [0,1,3,2]
+                    },
+                    {
+                        "sb-naam": "Betoverende Beestenbazaar"
+                    },
+                    {
+                        "sb-naam": "De Lekke Ketel",
+                        "db": "drinks",
+                        "items": [0,1,2]
+                    },
+                    {
+                        "sb-naam": "Florian Fanielje's IJssalon"
+                    },
+                    {
+                        "sb-naam": "Goudgrijp"
+                    },
+                    {
+                        "sb-naam": "Klieder & Vlek"
+                    },
+                    {
+                        "sb-naam": "Madame Mallekin, Gewaden voor Alle Gelegenheden"
+                    },
+                    {
+                        "sb-naam": "Zwik en Zwachtels Zwerkbalpaleis",
+                        "db": "brooms",
+                        "items": [0,1,2]
+                    }
+                ]
+            },
+            {
+                "pl-naam": "Wegisweg (Zuid)",
+                "sub":[
+                    {
+                        "sb-naam": "De Ochtendprofeet"
+                    },
+                    {
+                        "sb-naam":  "Olivanders"
+                    },
+                    {
+                        "sb-naam": "Obscurus Boeken"
+                    },
+                    {
+                        "sb-naam": "Morads Magische Koffers & Tassen",
+                        "db": "other",
+                        "items": [0,1]
+                    }
+                ]
+            }
+        ]
+    }
+}

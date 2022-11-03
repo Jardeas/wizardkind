@@ -1,0 +1,28 @@
+{
+    "db": {
+        "items": [
+            {
+                "naam": "Vuurflits",
+                "omschrijving": "Dit is de snelste bezemsteel die ooit gemaakt is. Deze bezemsteel kan een snelheid halen van 250km per uur en is gemaakt van het beste essenhout. Hij neemt bochten sneller dan alle bezemstelen op Zweinstein en is fantastisch om mee te vliegen. Enkel ervaren heksen en tovenaars kunnen deze bezem in bedwang houden. Met een vuurflits ben je ongetwijfeld de snelste zwerkbalspeler in jouw team. ",
+                "g": 8000,
+                "s": 6,
+                "k": 16
+            },
+            {
+                "naam": "Nimbus 2000",
+                "omschrijving": "De Nimbus 2001 is een van de best verkochte bezems sinds een lange tijd, en dit is het nieuwste model van de Nimbus serie. Hij is snel, scherp, en draait makkelijk. Deze bezem vereist beslist een ervaren heks of tovenaar, dus als je nog in je beginjaren op Zweinstein zit, kun je het beste een paar jaar wachten met het aanschaffen van deze bezem.",
+                "g": 4500,
+                "s": 0,
+                "k": 0
+            }
+            ,
+            {
+                "naam": "Helleveeg 11",
+                "omschrijving": "Deze bezem is makkelijk en snel om mee te vliegen. Het is erg aan te raden aan heksen of tovenaars die van vliegen houden maar ook een redelijke prijs voor hun bezem willen.",
+                "g": 2500,
+                "s": 0,
+                "k": 0
+            }
+        ]
+    }
+}
